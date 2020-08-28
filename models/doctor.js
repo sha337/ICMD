@@ -20,6 +20,7 @@ var doctorSchema = new mongoose.Schema({
     referenceEmail2: String,
     referencePhoneNumber2: String,
     password: String,
+    profileImage:String,
     joiningDate: {type: Date, default: Date.now},
     // comments: [
     //     {

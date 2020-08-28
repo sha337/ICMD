@@ -1,8 +1,9 @@
-const express = require("express"),
-      router  = express.Router(),
-      passport = require("passport"),
+const express       = require("express"),
+      router        = express.Router(),
+      passport      = require("passport"),
       LocalStrategy = require("passport-local"),
-      User  = require("../models/user");
+      User          = require("../models/user"),
+      upload        = require("../handlers/multer")
     
 
 router.get("/patient",(req,res)=>{
@@ -26,7 +27,8 @@ router.get("/patient/profile", isPatientLoggedIn, (req,res)=>{
 });
 
 // -----------Auth Routes for patient-------------------------------------
-router.post("/patient/signup", (req, res) => {
+router.post("/patient/signup",upload.single('profileImage'), (req, res) => {
+
 
     let newPatient=new User({
         // First attribute has to be the username for proper registration of the user
@@ -36,7 +38,8 @@ router.post("/patient/signup", (req, res) => {
         gender: req.body.gender, 
         age: req.body.age,
         phoneNumber: req.body.phoneNumber,
-        userType: req.body.userType
+        userType: req.body.userType,
+        profileImage:req.file.filename,
     });
 
     User.register(newPatient, req.body.password, (err, patient) =>{
@@ -70,15 +73,17 @@ router.get("/patient/failure", (req, res)=>{
 
 // ------------------------------Auth Routes Ends------------------------------
 
+
+
 // ---------------------Middleware------------
 function isPatientLoggedIn(req, res, next){
-    console.log(req.user);
+    // console.log(req.user);
     if(req.isAuthenticated() && req.user.userType === 'patient'){
         return next();
     }
     res.redirect("/patient/login");
 }
-// --------------------------------------------
+
 
 
 module.exports = router;

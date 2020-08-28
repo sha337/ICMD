@@ -30,6 +30,9 @@
       
     
     
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+
+
        
     
         <meta charset="utf-8"> 
@@ -76,11 +79,17 @@
                             </li>
                         <%} else {%>
                             <li class="nav-item active">
-                                <a href="#" class="nav-link">Welcome <%= currentUser.firstName %> <%= currentUser.lastName %></a>
+                                <a href="#" class="nav-link text-capitalize">Welcome <%= currentUser.firstName %></a>
                             </li>
                             <li class="nav-item active">
                                 <a href="/<%=currentUser.userType%>/logout" class="nav-link" >Logout</a>
                             </li>
+                            <% if(currentUser.profile_images !== null){ %>
+                            <li class="nav-item active">
+                                <img src="/profile_images/<%=currentUser.profileImage%>" alt="Avatar" class="avatar">
+                            </li>
+                            <%}%>
+                        
                         <% } %>
                     
                     </ul>
