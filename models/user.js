@@ -11,6 +11,7 @@ let userSchema = new mongoose.Schema({
     age:Number,
     phoneNumber: String,
     userType: String,
+    profileImage:String,
     joiningDate: {type: Date, default: Date.now},
 
     // Specific to Doctors Only

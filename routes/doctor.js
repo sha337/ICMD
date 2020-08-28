@@ -3,6 +3,7 @@ const express = require("express"),
       passport = require("passport"),
       LocalStrategy = require("passport-local"),
       User   = require("../models/user");
+      upload =require("../handlers/multer");
 
 router.get("/doctor", (req, res) => {
     res.render("doctor/doctor_landing_page");
@@ -22,7 +23,8 @@ router.get("/doctor/profile", isDoctorLoggedIn, (req,res)=>{
 
 // -----------Auth Routes for doctor-------------------------------------
 
-router.post("/doctor/signup", (req, res) => {
+router.post("/doctor/signup",upload.single('profileImage'),(req, res) => {
+
 
     let newDoctor = new User({
         // First attribute has to be the username for proper registration of the user
@@ -32,7 +34,8 @@ router.post("/doctor/signup", (req, res) => {
         phoneNumber: req.body.phoneNumber,
         gender: req.body.gender, 
         age: req.body.age,
-        userType: req.body.userType
+        userType: req.body.userType,
+        profileImage:req.file.filename
         // mciLicense: req.body.mciLicense,
         // specialization: req.body.specialization,
         // referenceFirstName1: req.body.referenceFirstName1,

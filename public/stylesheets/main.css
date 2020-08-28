@@ -13,6 +13,16 @@
     font-size: large;
 }
 
+.navbar .navbar-brand{
+
+    font-family: Simonetta;
+    font-weight: 900;
+	font-size: large;
+	text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
+				 0px 8px 13px rgba(0, 0, 0, 0.1),
+				 0px 18px 23px rgba(0, 0, 0, 0.1);
+}
+
 .navbar-dark .navbar-nav .nav-link:hover {
     color: rgba(0, 0, 0);
 }
@@ -20,6 +30,28 @@
 body, html {
 	height: 100%;
 }
+
+#content{
+	text-align: center;
+	padding-top: 15%;
+	font-family: Lato;
+	text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
+				 0px 8px 13px rgba(0, 0, 0, 0.1),
+				 0px 18px 23px rgba(0, 0, 0, 0.1);
+}
+
+#content h1{
+	font-weight: 700;
+	font-size: 2.8em;
+}
+
+
+#content hr{
+	width: 300px;
+	border-top:1px solid #f8f8f8;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
 
 /* doctor background img */
 .doctor_landing_img{
@@ -79,16 +111,26 @@ body, html {
 	font-family: Raleway;
 	font-weight: 400;
 	line-height: 1.6;
+	text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
+				 0px 8px 13px rgba(0, 0, 0, 0.1),
+				 0px 18px 23px rgba(0, 0, 0, 0.1);
 }
 
 .home-page-landing-text h1{
 	font-family: Lora;
-	font-weight: 900;
+	font-weight: 700;
+	font-size: 2.8em;
+	text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
+				 0px 8px 13px rgba(0, 0, 0, 0.1),
+				 0px 18px 23px rgba(0, 0, 0, 0.1);
 	
 }
 
 .home-page-landing-text a{
-	background-color: #004A7D;
+	text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
+				 0px 8px 13px rgba(0, 0, 0, 0.1),
+				 0px 18px 23px rgba(0, 0, 0, 0.1);
+	
 }
 
 .home-registration-text h1{
@@ -137,3 +179,10 @@ body, html {
 	font-family: Simonetta;
 	font-size: 1.5rem;
 }
+
+.avatar {
+	vertical-align: middle;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+  }
