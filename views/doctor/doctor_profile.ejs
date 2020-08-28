@@ -1,8 +1,34 @@
 <%- include("../partials/header") %>
 
-<h1>
-    welcome home doctor
-    <a href="/doctor/logout">logout</a>
-</h1>
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="list-group list-group-flush">
+        <a href="#" class="sidebar-heading list-group-item list-group-item-action bg-light">Dashboard</a>
+        <a href="#" class="sidebar-heading list-group-item list-group-item-action bg-light">Patients</a>
+        <a href="#" class="sidebar-heading list-group-item list-group-item-action bg-light">Appointments</a>
+        <a href="#" class="sidebar-heading list-group-item list-group-item-action bg-light">Prescription</a>
+        <a href="#" class="sidebar-heading list-group-item list-group-item-action bg-light">Calender</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div>
+            <h1>
+                welcome home doctor
+                <a href="/doctor/logout">logout</a>
+            </h1>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+  <!-- /#wrapper -->
+
+
+
 
 <%- include("../partials/footer") %>
