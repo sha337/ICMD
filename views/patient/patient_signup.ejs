@@ -1,0 +1,128 @@
+<%- include("../partials/header") %>
+
+<!-- Patient Signup form -->
+
+<div class="container" >
+    <div class="container ">
+       
+    <div class="row justify-content-center"  >
+                
+                        <div class="col-md-8 shadow p-3 mb-5 bg-white rounded" style="margin-top: 100px;">
+                            <div class="card">
+                                <div class="card-header"><span style="font-size: 1.5em;"><i class="fa fa-heartbeat" style="color:#9e2969;margin-right:10px"></i> Register</span></div>
+                                <div class="card-body">
+    
+                                    <form class="form-horizontal" action="/patient/signup" method="POST">
+    
+                                        <!-- default user type -->
+                                        <input type="text" name="userType" value="patient" hidden>
+
+                                        <div class="form-group">
+                                            <label for="name" class="cols-sm-2 control-label" >First Name</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"></span>
+                                                    <input type="text" class="form-control" name="firstName" id="name" placeholder="Enter Your First Name"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="name" class="cols-sm-2 control-label" >Last Name</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"></span>
+                                                    <input style="margin-left: -5px;" type="text" class="form-control" name="lastName" id="email" placeholder="Enter Your Last Name"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email" class="cols-sm-2 control-label" >E-Mail</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"></span>
+                                                    <input style="margin-left: -5px;" type="text" class="form-control" name="username" id="email" placeholder="Enter your Email"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email" class="cols-sm-2 control-label" >Gender</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"></span>
+                                                    <select class="form-control" name="gender" id="">
+                                                        <option selected disabled>Gender</option>
+                                                        <option value="male">Male</option>
+                                                        <option value="female">Female</option>
+                                                        <option value="others">Others</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email" class="cols-sm-2 control-label">Age</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"></span>
+                                                    <input style="margin-left: -5px;" type="text" class="form-control" name="age" id="email" placeholder="Enter Your Age"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="email" class="cols-sm-2 control-label" >Phone Number</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"></span>
+                                                    <input style="margin-left: -5px;" type="text" class="form-control" name="phoneNumber" id="email" placeholder="Enter your Phone Number"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <div class="form-group">
+                                            <label for="password" class="cols-sm-2 control-label" >Password</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"></span>
+                                                    <input style="margin-left: -8px;" type="password" class="form-control" name="password" id="password" placeholder="Enter your Password"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                      
+                                       
+                                        <!-- <div class="form-group">
+                                            <label for="email" class="cols-sm-2 control-label" >Current Location</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"></span>
+                                                    <input style="margin-left: -5px;" type="text" class="form-control" name="current_location" id="email" placeholder="Enter your Email"/>
+                                                </div>
+                                            </div>
+                                        </div>  -->
+                                        
+                                        <div class="form-group ">
+                                            
+                                            <button type="submit" class="btn btn-info btn-lg btn-block login-button">Register</button>
+                                        </div>
+                                        <div class="login-register">
+                                            <p>Already have an account ? <a href="/patient/login">Login</a></p>
+                                        </div>
+                                    </form>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                   
+                    
+    </div>
+
+    <div style="margin-top:1.5em;">
+
+<%- include("../partials/footer") %>

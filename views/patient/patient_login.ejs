@@ -1,0 +1,59 @@
+<%- include("../partials/header") %>
+
+<div class="container" >
+    <div class="container">
+    <div class="row justify-content-center"  >
+                        <div class="col-md-8 shadow p-3 mb-5 bg-white rounded" style="margin-top: 100px;">
+                            <div class="card">
+                                <div class="card-header"><i class="fa fa-heartbeat" style="color:#9e2969;margin-right:10px;font-size: 1.5rem;"></i><span style="font-size: 1.5em;">Login</span></div>
+                                <div class="card-body">
+    
+                                    <form class="form-horizontal" action="/patient/login" method="POST">
+    
+                                        <div class="form-group">
+                                            <label for="name" class="cols-sm-2 control-label">E-Mail</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"></span>
+                                                    <input type="text" class="form-control" name="username" id="name" placeholder="Enter your E-Mail" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="cols-sm-2 control-label">Password</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"></span>
+                                                    <input style="margin-left: -8px;" type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            
+                                            <button type="submit" class="btn btn-success btn-lg btn-block login-button">Login</button>
+                                        </div>
+                                        <div class="login-register">
+                                            <p>Don't have an account ? <a href="/patient/signup">SignUp</a></p>
+                                        </div>
+                                    </form>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include("../partials/footer") %>

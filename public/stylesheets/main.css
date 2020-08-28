@@ -1,0 +1,139 @@
+/* navbar background color */
+.navbar{
+	background-color: rgba(245, 245, 245, 0.5);
+	min-height: 100px;
+    /* height: 100px; */
+}
+
+
+.navbar-brand{
+	color: rgba(0, 0, 0);
+    font-family: Simonetta;
+    font-weight: 900;
+    font-size: large;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: rgba(0, 0, 0);
+}
+
+body, html {
+	height: 100%;
+}
+
+/* doctor background img */
+.doctor_landing_img{
+	background-image: url("/imgs/Doctor 7.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
+	
+	text-align: center;
+	
+}
+.doctor_landing_img .doctor-heading{
+	padding-top: 10%;
+	margin-bottom: 2%;
+}
+
+
+.doctor_landing_img .doctor-content{
+	line-height: 50%;
+}
+
+.patient_landing_img{
+	background-image: url("/imgs/Doctor 2.jpg");
+	background-position: center;
+	display: block;
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+	min-height: 34rem;
+	
+	text-align: center;
+
+}
+
+
+
+/* Home Page CSS */
+.home-page-landing-image{
+	background-image: url("/imgs/Doctor 6.jpg");
+	background-position: center;
+	display: block;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 80%;
+}
+
+.home-page-landing-text{
+	padding-top: 12%;
+	padding-left: 5%;
+	
+	color: #000000;
+	
+}
+
+.home-page-landing-text p{
+	font-family: Raleway;
+	font-weight: 400;
+	line-height: 1.6;
+}
+
+.home-page-landing-text h1{
+	font-family: Lora;
+	font-weight: 900;
+	
+}
+
+.home-page-landing-text a{
+	background-color: #004A7D;
+}
+
+.home-registration-text h1{
+	text-align: center;
+	margin-top: 5%;
+	color: #004A7D;
+	font-family: Montserrat;
+	font-size: 2.5vw;
+	font-weight: 500;
+}
+
+.home-registration-text p{
+	text-align: center;
+	font-size: 26px;
+	font-family: Montserrat;
+	padding-bottom: 5%;
+	font-size:2vw;
+}
+
+.price-plans{
+	padding-top: 5%;
+	background-color: #F9F9F9;
+	padding-bottom: 5%;
+}
+
+.price-plans h1{
+	font-weight: 700;
+	font-family: Montserrat;
+}
+
+.price-plans-text{
+	font-weight: 500;
+	font-family: Montserrat;	
+}
+
+.plan-item{
+	text-align: center;
+	padding-left: 30px;
+	padding-right: 30px;
+	font-size: 1.2rem;
+}
+
+.plan-heading{
+	padding-top: 5%;
+	text-align: center; 
+	font-family: Simonetta;
+	font-size: 1.5rem;
+}

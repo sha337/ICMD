@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>i Consult My Doctor</title>
+        <!-- below line for logo in tab -->
+        <!-- <link rel="shortcut icon" href="/imgs/marketplace.png" />     -->
+        <!-- Latest compiled and minified CSS -->
+
+
+        <!-- Bootstrap Libraries-------- -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <!-- Bootstrap Ends------------------------------------- -->
+
+        <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="stylesheet" href="/stylesheets/footer.css">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lora|Simonetta:400,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,500;0,700;0,900;1,200&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/v4-shims.css">
+      
+
+       
+    
+        <meta charset="utf-8"> 
+	    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+	
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
+  
+
+        <!-- Navbar Starts-------------------------- -->
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="/" style="font-size: 1.8rem;letter-spacing: 0.16rem;color:#004A7D"><i class="fa fa-heartbeat" style="font-size:2.0rem;color:#AE1438"></i> <span style="color:#AE1438">i</span>consultmydoctor</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="font-size: 0.95rem;">
+                        <li class="nav-item active">
+                            <a href="/allPosts" class="nav-link" style="margin:8px;font-weight: 250;">Our Doctors</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="/allPosts" class="nav-link" style="margin:8px;font-weight: 250;">How It Works</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="/payment" class="nav-link" style="margin:8px;font-weight: 250;">ICMD Club Member</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="/about" class="nav-link" style="margin:8px;font-weight: 250;">About</a>
+                        </li>
+                    </ul>
+                    
+                
+                    <ul class="navbar-nav ml-auto">
+                        <% if( !currentUser ){ %>
+                            <li class="nav-item active">
+                                <a href="/patient" class="nav-link">For Patients</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a href="/doctor" class="nav-link" >For Doctors</a>
+                            </li>
+                        <%} else {%>
+                            <li class="nav-item active">
+                                <a href="#" class="nav-link">Welcome <%= currentUser.firstName %> <%= currentUser.lastName %></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a href="/<%=currentUser.userType%>/logout" class="nav-link" >Logout</a>
+                            </li>
+                        <% } %>
+                    
+                    </ul>
+               
+                </div>
+            </div>
+          </nav>
+
+          <!-- Navbar Ends-------------------------------------------- -->
+        
+        
+      
