@@ -81,7 +81,7 @@ function isPatientLoggedIn(req, res, next){
     if(req.isAuthenticated() && req.user.userType === 'patient'){
         return next();
     }
-    res.redirect("/patient/login");
+    res.redirect("/patient/logout");
 }
 
 

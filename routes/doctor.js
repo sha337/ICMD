@@ -86,7 +86,7 @@ function isDoctorLoggedIn(req, res, next){
     if(req.isAuthenticated() && req.user.userType === 'doctor'){
         return next();
     }
-    res.redirect("/doctor/login");
+    res.redirect("/doctor/logout");
 }
 
 
