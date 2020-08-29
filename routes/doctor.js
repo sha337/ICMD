@@ -2,7 +2,7 @@ const express = require("express"),
       router  = express.Router(),
       passport = require("passport"),
       LocalStrategy = require("passport-local"),
-      User   = require("../models/user");
+      User   = require("../models/user"),
       upload =require("../handlers/multer");
 
 router.get("/doctor", (req, res) => {
@@ -20,6 +20,23 @@ router.get("/doctor/login", (req, res) =>{
 router.get("/doctor/profile", isDoctorLoggedIn, (req,res)=>{
     res.render("doctor/doctor_profile");
 });
+
+
+// Display all Doctors
+
+router.get("/our-doctors/",(req,res)=>{
+
+    User.find({userType:'doctor'},(err,doctors)=>{
+
+        if(err){
+            console.log(err)
+        }else{
+            res.render("doctor/allDoctors",{doctors:doctors});
+        }
+    });
+});
+
+
 
 // -----------Auth Routes for doctor-------------------------------------
 
@@ -61,7 +78,7 @@ router.post("/doctor/signup",upload.single('profileImage'),(req, res) => {
     });
 });
 
-router.post("/doctor/login", passport.authenticate("local",
+router.post("/doctor/login",passport.authenticate("local",
     {
         successRedirect: "/doctor/profile",
         failureRedirect: "/doctor/failure"
@@ -86,7 +103,8 @@ function isDoctorLoggedIn(req, res, next){
     if(req.isAuthenticated() && req.user.userType === 'doctor'){
         return next();
     }
-    res.redirect("/doctor/logout");
+    req.logout();
+    res.redirect("/doctor/login");
 }
 
 

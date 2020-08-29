@@ -1,0 +1,32 @@
+<%- include("../partials/header") %>
+
+    <section style="margin-top:70px">
+        <% doctors.forEach(function(doctor){%>
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">
+                      Department of Neurology
+                    </div>
+                    <div class="card-body">
+                      
+                        <% if(doctor.profileImage !== null) {%>
+                            <img src="/profile_images/<%=doctor.profileImage%>" alt="Avatar" class="avatar materialboxed" style="width: 100px;height: 100px;">
+                        <%}%>
+                      
+                        <h5 class="card-title">Dr.<%= doctor.firstName %> <%=doctor.lastName%></h5>
+                        <p class="card-text" style="font-size:0.9rem;font-weight: 300;">Contact : +91-<%=doctor.phoneNumber %></p>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-info">Get Appointment</a>
+                    
+                    </div>
+                  </div>
+            </div>
+    
+        <% }) %>
+    
+    </section>
+
+    <div style="margin-bottom: 3.5rem;"></div>
+    
+    
+<%- include("../partials/footer") %>
