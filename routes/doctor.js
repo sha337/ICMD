@@ -2,7 +2,7 @@ const express = require("express"),
       router  = express.Router(),
       passport = require("passport"),
       LocalStrategy = require("passport-local"),
-      User   = require("../models/user");
+      User   = require("../models/user"),
       upload =require("../handlers/multer");
 
 router.get("/doctor", (req, res) => {
