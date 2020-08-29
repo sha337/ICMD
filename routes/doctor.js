@@ -1,10 +1,11 @@
-const express = require("express"),
-      router  = express.Router(),
-      passport = require("passport"),
+const express       = require("express"),
+      router        = express.Router(),
+      passport      = require("passport"),
       LocalStrategy = require("passport-local"),
-      User   = require("../models/user"),
-      upload =require("../handlers/multer");
+      User          = require("../models/user"),
+      upload        = require("../handlers/multer");
 
+      
 router.get("/doctor", (req, res) => {
     res.render("doctor/doctor_landing_page");
 });
@@ -24,14 +25,14 @@ router.get("/doctor/profile", isDoctorLoggedIn, (req,res)=>{
 
 // Display all Doctors
 
-router.get("/our-doctors/",(req,res)=>{
+router.get("/doctor/viewall",(req,res)=>{
 
     User.find({userType:'doctor'},(err,doctors)=>{
 
         if(err){
             console.log(err)
         }else{
-            res.render("doctor/allDoctors",{doctors:doctors});
+            res.render("doctor/doctor_view_all",{doctors:doctors});
         }
     });
 });
@@ -97,6 +98,7 @@ router.get("/doctor/failure", (req, res)=>{
 // ------------------------------Auth Routes Ends------------------------------
 
 
+
 // ---------------------Middleware------------
 function isDoctorLoggedIn(req, res, next){
     
@@ -106,7 +108,6 @@ function isDoctorLoggedIn(req, res, next){
     req.logout();
     res.redirect("/doctor/login");
 }
-
 
 // --------------------------------------------
 

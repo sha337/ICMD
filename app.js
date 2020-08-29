@@ -8,16 +8,12 @@ const   express = require("express"),
         User         = require("./models/user");
 
 
-
+// Basic setup
 app.set("view engine", "ejs");
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 mongoose.connect("mongodb://localhost:27017/ICMD", {useNewUrlParser: true, useUnifiedTopology: true});
 
-
-// Requiring routes
-const doctorRoutes  = require("./routes/doctor");
-const patientRoutes = require("./routes/patient");
 
 
 //passport configuration
@@ -32,22 +28,29 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
     next();
 });
 
 
-
+// Home page route
 app.get('/', (req, res) =>{
     res.render("home");
 });
 
 
+// Requiring routes
+const doctorRoutes  = require("./routes/doctor");
+const patientRoutes = require("./routes/patient");
+const meetingRoutes = require("./routes/meeting");
+
+
 // using routes
 app.use(doctorRoutes);
 app.use(patientRoutes);
-
+app.use(meetingRoutes);
 
 app.listen(process.env.PORT || 3000, process.env.IP, () => {
     console.log("server started on port 3000 ....");

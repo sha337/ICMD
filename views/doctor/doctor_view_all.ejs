@@ -16,7 +16,14 @@
                         <h5 class="card-title">Dr.<%= doctor.firstName %> <%=doctor.lastName%></h5>
                         <p class="card-text" style="font-size:0.9rem;font-weight: 300;">Contact : +91-<%=doctor.phoneNumber %></p>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-info">Get Appointment</a>
+                        
+                        <!-- <a href="#" class="btn btn-info">Get Appointment</a> -->
+                        
+                        
+                        <form action="/patient/<%=doctor._id%>/meeting" method="POST">
+                            <input class="form-control" type="text" name="meeting[text]" placeholder="Your bimari here...">
+                            <button class="btn  btn-outline-dark">Get Appointment</button>
+                        </form>
                     
                     </div>
                   </div>

@@ -26,8 +26,7 @@ let userSchema = new mongoose.Schema({
     referenceEmail2: String,
     referencePhoneNumber2: String,
 
-    // to be added for doctor - 1.meetings attended
-    // to be added for patient - 1.meetings attended
+    // meetings attended
     meetings: [
         {
             type: mongoose.Schema.Types.ObjectId,
