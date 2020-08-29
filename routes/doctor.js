@@ -21,6 +21,23 @@ router.get("/doctor/profile", isDoctorLoggedIn, (req,res)=>{
     res.render("doctor/doctor_profile");
 });
 
+
+// Display all Doctors
+
+router.get("/our-doctors/",(req,res)=>{
+
+    User.find({userType:'doctor'},(err,doctors)=>{
+
+        if(err){
+            console.log(err)
+        }else{
+            res.render("doctor/allDoctors",{doctors:doctors});
+        }
+    });
+});
+
+
+
 // -----------Auth Routes for doctor-------------------------------------
 
 router.post("/doctor/signup",upload.single('profileImage'),(req, res) => {
@@ -86,6 +103,7 @@ function isDoctorLoggedIn(req, res, next){
     if(req.isAuthenticated() && req.user.userType === 'doctor'){
         return next();
     }
+    req.logout();
     res.redirect("/doctor/login");
 }
 
