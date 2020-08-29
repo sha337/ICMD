@@ -28,6 +28,12 @@ let userSchema = new mongoose.Schema({
 
     // to be added for doctor - 1.meetings attended
     // to be added for patient - 1.meetings attended
+    meetings: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Meeting"
+        }
+    ]
 
 });
 

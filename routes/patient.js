@@ -3,7 +3,8 @@ const express       = require("express"),
       passport      = require("passport"),
       LocalStrategy = require("passport-local"),
       User          = require("../models/user"),
-      upload        = require("../handlers/multer")
+      Meeting       = require("../models/meeting"),
+      upload        = require("../handlers/multer");
     
 
 router.get("/patient",(req,res)=>{
@@ -73,6 +74,50 @@ router.get("/patient/failure", (req, res)=>{
 
 // ------------------------------Auth Routes Ends------------------------------
 
+
+// ------------------------------Generate Meeting Route------------------------
+
+router.post("/patient/:id/meeting", (req,res) =>{
+    // Finding the doctor from database
+    User.findById(req.params.id, (err, doctor)=>{
+        if(err){
+            console.log(err);
+            res.redirect("/");
+        }else{
+            Meeting.create(req.body.meeting, (err, meeting)=>{
+                if(err){
+                    counsole.log(err);
+                    res.redirect("/");
+                }else{
+                    // adding patient details
+                    meeting.patient.id = req.user._id;
+                    meeting.patient.firstName = req.user.firstName;
+                    meeting.patient.lastName = req.user.lastName;
+
+                    // adding doctor details
+                    meeting.doctor.id = doctor._id;
+                    meeting.doctor.firstName = doctor.firstName;
+                    meeting.doctor.lastName = doctor.lastName;
+
+                    // update meeting
+                    meeting.save();
+
+                    // push meeting in doctors database
+                    doctor.meetings.push(meeting);
+                    doctor.save();
+
+                    // push meeting in patient database
+                    User.findById(req.user._id, (err, patient)=>{
+                        patient.meetings.push(meeting);
+                        patient.save();
+                    });
+
+                    res.redirect("/patient/profile");
+                }
+            });
+        }
+    });
+});
 
 
 // ---------------------Middleware------------
