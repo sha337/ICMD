@@ -61,7 +61,7 @@ router.post("/doctor/signup",upload.single('profileImage'),(req, res) => {
     });
 });
 
-router.post("/doctor/login", passport.authenticate("local",
+router.post("/doctor/login",passport.authenticate("local",
     {
         successRedirect: "/doctor/profile",
         failureRedirect: "/doctor/failure"
