@@ -21,9 +21,9 @@ router.get("/patient/login", (req, res) =>{
     res.render("patient/patient_login");
 });
 
-router.get("/patient/profile", isPatientLoggedIn, (req,res)=>{
+router.get("/patient/patient-home", isPatientLoggedIn, (req,res)=>{
 
-    res.render("patient/patient_profile");
+    res.render("patient/patient_home");
 });
 
 // -----------Auth Routes for patient-------------------------------------
@@ -55,7 +55,7 @@ router.post("/patient/signup",upload.single('profileImage'), (req, res) => {
 });
 
 router.post("/patient/login", passport.authenticate("local",{
-    successRedirect: "/patient/profile",
+    successRedirect: "/patient/patient-home",
     failureRedirect: "/patient/failure"
 }), (req, res) => {
         

@@ -1,0 +1,37 @@
+
+.patient-home{
+  
+        margin: auto;
+        width: 80%;
+        /* border: 3px solid green; */
+        padding: 10px;
+   
+}
+
+.patient-home .card{
+    max-width: 18rem;max-height: 18rem;
+    text-align: center;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5), 
+                0 4px 5px 0 rgba(0, 0, 0, 0.29);
+}
+
+.patient-home .card-header{
+    font-weight: 700;
+    letter-spacing: 0.08rem;
+    font-size: 1.2rem;
+    text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
+    0px 8px 13px rgba(0, 0, 0, 0.1),
+    0px 18px 23px rgba(0, 0, 0, 0.1);
+}
+
+.patient-home .card-body{
+    background-color:white;
+    color:black;
+    max-height: 12rem;
+}
+
+.patient-home .card-body p:nth-of-type(2){
+    text-align: center;
+    font-size: 2rem;
+    margin-top:-0.2rem;
+}

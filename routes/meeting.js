@@ -5,7 +5,7 @@ const express       = require('express'),
 
 
 // Create a meeting route
-router.post("/patient/:id/meeting", (req,res) =>{
+router.post("/patient/:id/meeting",isPatientLoggedIn,(req,res) =>{
     
     // Finding the doctor from database
     User.findById(req.params.id, (err, doctor)=>{
@@ -51,6 +51,17 @@ router.post("/patient/:id/meeting", (req,res) =>{
         }
     });
 });
+
+// Middle ware
+function isPatientLoggedIn(req, res, next){
+    // console.log(req.user);
+    if(req.isAuthenticated() && req.user.userType === 'patient'){
+        return next();
+    }
+    req.logout();
+    res.redirect("/patient/login");
+}
+
 
 
 module.exports = router;
