@@ -35,3 +35,12 @@
     font-size: 2rem;
     margin-top:-0.2rem;
 }
+
+.patient-home .card{
+	transition: transform 0.2s;
+}
+
+.patient-home .card:hover{
+    transform: scale(1.0);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
