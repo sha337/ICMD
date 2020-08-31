@@ -5,7 +5,7 @@ const express       = require('express'),
 
 
 // Create a meeting route
-router.post("/patient/:id/meeting",isPatientLoggedIn,(req,res) =>{
+router.post("/patient/:id/meeting", isPatientLoggedIn, (req,res) =>{
     
     // Finding the doctor from database
     User.findById(req.params.id, (err, doctor)=>{

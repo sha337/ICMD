@@ -24,7 +24,6 @@ router.get("/doctor/profile", isDoctorLoggedIn, (req,res)=>{
 
 
 // Display all Doctors
-
 router.get("/doctor/viewall",(req,res)=>{
 
     User.find({userType:'doctor'},(err,doctors)=>{
@@ -36,6 +35,7 @@ router.get("/doctor/viewall",(req,res)=>{
         }
     });
 });
+
 
 
 
