@@ -82,7 +82,7 @@
                             </li>
                         <%} else {%>
                             <li class="nav-item active">
-                                <a href="#" class="nav-link text-capitalize">Welcome <%= currentUser.firstName %></a>
+                                <a href="/<%=currentUser.userType%>/profile" class="nav-link text-capitalize">Welcome <%= currentUser.firstName %> <%=currentUser.lastName%></a>
                             </li>
                             <li class="nav-item active">
                                 <a href="/<%=currentUser.userType%>/logout" class="nav-link" >Logout</a>
