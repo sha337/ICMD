@@ -22,7 +22,8 @@ router.get("/patient/login", (req, res) =>{
 });
 
 router.get("/patient/profile", isPatientLoggedIn, (req,res)=>{
-
+    // req.user = req.user.meetings.populate("meetings");
+    console.log(currentUser);
     res.render("patient/patient_profile");
 });
 

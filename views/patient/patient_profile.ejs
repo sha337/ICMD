@@ -3,7 +3,7 @@
 
 
 
-
+<!-- DashBoard Content Below -->
 <section class="dashboard-content content">
   <div>
     <div class="card mb-5">
@@ -19,18 +19,37 @@
 </section>
 
 
+<!-- Meeting Content Below -->
 <section class="meeting-content content">
-  <div>
-    <div class="card mb-5">
-      <a class="btn btn-lg btn-primary" href="/doctor/viewall"> viewall meetings</a>
+  <div class="card mb-5">
+    <a class="btn btn-lg btn-primary" href="/doctor/viewall"> viewall meetings</a>
+  </div>
+
+  <!-- 
+  <% currentUser.meetings.forEach(function(meeting){ %>
+    <div class="row">
+        <div class="col-md-12">
+            <%console.log(meeting)%>
+            <strong>Doctor: <%= meeting.doctor.firstName %></strong>
+            <strong>Patient: <%= meeting.patient.firstName %></strong>
+            
+            <p>
+                <%= meeting.text %>
+            </p>
+             
+        </div>
     </div>
-    <div class="card mb-5">
-      <p>ALL Meeting go here</p>
-    </div>
+<% }) %> -->
+
+  
+    
+  <div class="card mb-5">
+    <p>ALL Meeting go here</p>
   </div>
 </section>
 
 
+<!-- Prescription Content Below -->
 <section class="prescription-content content">
   <div>
     <div class="card mb-5">
@@ -43,6 +62,7 @@
 </section>
 
 
+<!-- payment Content Below -->
 <section class="payment-content content">
   <div>
     <div class="card mb-5">
@@ -55,6 +75,7 @@
 </section>
 
 
+<!-- messages Content Below -->
 <section class="message-content content">
   <div>
     <div class="card mb-5">
