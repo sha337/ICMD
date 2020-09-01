@@ -6,12 +6,14 @@
   
   <title>i Consult My Doctor</title>
 
+  <!-- link to bootstrap -->
+  <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+
   <!-- link to css file -->
   <link rel="stylesheet" href="/stylesheets/loggedin_main.css">
 
   <!-- fonts -->
   <link href="https://fonts.googleapis.com/css?family=Lora|Simonetta:400,900&display=swap" rel="stylesheet">
-
 
   <!-- fontawesome cdn -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -32,13 +34,12 @@
     <label for="check">
       <i class="fas fa-bars" id="sidebar_btn"></i>
     </label>
-    <div class="left_area">
-      <!-- <h3>Coding <span>Snow</span></h3> -->
-      <a class="navbar-brand" href="/<%=currentUser.userType%>/profile" style="text-decoration: none; font-size: 1.8rem;letter-spacing: 0.16rem;color:#004A7D"><i class="fa fa-heartbeat" style="font-size:2.0rem;color:#AE1438"></i> <span style="color:#AE1438">i</span>consultmydoctor</a>
-    </div>
-    <div class="right_area">
+    
+      <a class="brand-name" href="/<%=currentUser.userType%>/profile" style="text-decoration: none; font-size: 1.8rem;letter-spacing: 0.16rem;color:#004A7D"><i class="fa fa-heartbeat" style="font-size:2.0rem;color:#AE1438"></i> <span style="color:#AE1438">i</span>consultmydoctor</a>
+   
+    
       <a href="/<%=currentUser.userType%>/logout" class="logout_btn">Logout</a>
-    </div>
+  
   </header>
   <!-- Header area ends  -->
 
