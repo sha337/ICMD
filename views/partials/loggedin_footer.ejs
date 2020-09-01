@@ -6,6 +6,55 @@
       });
     });
   </script>
+
+  <script>
+    $(document).ready(function(){
+      $(".meeting-content").hide();
+      $(".prescription-content").hide();
+      $(".payment-content").hide();
+      $(".message-content").hide();
+    });
+  </script>
+
+  <script>
+    $(document).ready(function(){
+      $(".dashboard").click(function(){
+        $(".dashboard-content").show();
+        $(".meeting-content").hide();
+        $(".prescription-content").hide();
+        $(".payment-content").hide();
+        $(".message-content").hide();
+      });
+      $(".meeting").click(function(){
+        $(".dashboard-content").hide();
+        $(".meeting-content").show();
+        $(".prescription-content").hide();
+        $(".payment-content").hide();
+        $(".message-content").hide();
+      });
+      $(".prescription").click(function(){
+        $(".dashboard-content").hide();
+        $(".meeting-content").hide();
+        $(".prescription-content").show();
+        $(".payment-content").hide();
+        $(".message-content").hide();
+      });
+      $(".payment").click(function(){
+        $(".dashboard-content").hide();
+        $(".meeting-content").hide();
+        $(".prescription-content").hide();
+        $(".payment-content").show();
+        $(".message-content").hide();
+      });
+      $(".message").click(function(){
+        $(".dashboard-content").hide();
+        $(".meeting-content").hide();
+        $(".prescription-content").hide();
+        $(".payment-content").hide();
+        $(".message-content").show();
+      });
+    });
+  </script>
   
 </body>
 </html>
