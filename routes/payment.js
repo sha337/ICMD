@@ -13,9 +13,6 @@ router.post("/patient/:id/meeting/payment", isPatientLoggedIn, (req, res) => {
     // save doctors id to pass it to success url
     let docid = req.params.id;
     
-
-
-
     // ******************************Payment Handeling below*****************
     
     //Here save all the details in pay object
