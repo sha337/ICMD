@@ -32,8 +32,15 @@ let userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Meeting"
         }
-    ]
+    ],
 
+    // payments done by patient/ ( or for which doctor )
+    payments : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Payment"
+        }
+    ]
 });
 
 userSchema.plugin(passportLocalMongoose);

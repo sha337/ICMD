@@ -20,10 +20,12 @@
                         <!-- <a href="#" class="btn btn-info">Get Appointment</a> -->
                         
                         
-                        <form action="/patient/<%=doctor._id%>/meeting" method="POST">
-                            <input class="form-control" type="text" name="meeting[text]" placeholder="Your bimari here...">
+                        <form action="/patient/<%=doctor._id%>/meeting/payment" method="POST">
+                            <input class="form-control" type="text" name="amount" value="258" placeholder="amount">
+                            <input type="text" name="text" value="Hi doctor" placeholder="message to doc">
                             <button class="btn btn-info">Get Appointment</button>
                         </form>
+                
                     
                     </div>
                   </div>

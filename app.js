@@ -5,7 +5,8 @@ const   express = require("express"),
         passport   = require("passport"),
         LocalStrategy = require("passport-local"),
         passportLocalMongoose = require('passport-local-mongoose'),
-        User         = require("./models/user");
+        User         = require("./models/user"),
+        request = require('request');
 
 
 // Basic setup
@@ -45,12 +46,15 @@ app.get('/', (req, res) =>{
 const doctorRoutes  = require("./routes/doctor");
 const patientRoutes = require("./routes/patient");
 const meetingRoutes = require("./routes/meeting");
+const paymentRoutes = require("./routes/payment");
 
 
 // using routes
 app.use(doctorRoutes);
 app.use(patientRoutes);
 app.use(meetingRoutes);
+app.use(paymentRoutes);
+
 
 app.listen(process.env.PORT || 3000, process.env.IP, () => {
     console.log("server started on port 3000 ....");
