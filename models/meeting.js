@@ -18,7 +18,8 @@ let meetingSchema = new mongoose.Schema({
         firstName: String,
         lastName: String
     },
-    text: String 
+    time: String,
+    date: String 
 });
 
 module.exports = mongoose.model("Meeting", meetingSchema);

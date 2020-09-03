@@ -1,0 +1,14 @@
+<%- include("../partials/loggedin_header") %>
+
+<div style="margin-top: 150px; margin-left: 50px;">
+    <h1>please click submit to confirm your meeeting</h1>
+    <form action="/patient/<%=meeting.doctor_id%>/meeting" method="POST">
+        <input type="text" value="<%=meeting.time%>" name="meeting[time]">
+        <input type="text" value="<%=meeting.date%>" name="meeting[date]">
+        <button>Submit</button>
+    </form>
+</div>
+
+
+
+<%- include("../partials/loggedin_footer") %>
