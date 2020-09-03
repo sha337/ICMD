@@ -12,6 +12,61 @@ const express       = require('express'),
 router.post("/patient/:id/meeting/payment", isPatientLoggedIn, (req, res) => {
     // save doctors id to pass it to success url
     let docid = req.params.id;
+    // save the meeting id for payment failure adn 
+    let meetingid = "";
+
+
+    let meetingdetails = {
+        time: req.body.time,
+        date: req.body.date
+    };
+    
+    // creating a meeting in my database
+    // Finding the doctor from database
+    User.findById(req.params.id, (err, doctor)=>{
+        if(err){
+            console.log(err);
+            res.redirect("/");
+        }else{
+            
+            // Create a meeting in DB
+            Meeting.create(meetingdetails, (err, meeting)=>{
+                if(err){
+                    counsole.log(err);
+                    res.redirect("/");
+                }else{
+                    meetingid = meeting._id;
+                    // adding patient details
+                    meeting.patient.id = req.user._id;
+                    meeting.patient.firstName = req.user.firstName;
+                    meeting.patient.lastName = req.user.lastName;
+
+                    // adding doctor details
+                    meeting.doctor.id = doctor._id;
+                    meeting.doctor.firstName = doctor.firstName;
+                    meeting.doctor.lastName = doctor.lastName;
+
+                    // update meeting
+                    meeting.save();
+
+                    // push meeting in doctors database
+                    doctor.meetings.push(meeting);
+                    doctor.save();
+
+                    // Finding the patient
+                    User.findById(req.user._id, (err, patient)=>{
+                        // push the meeting in patient DB
+                        patient.meetings.push(meeting);
+                        patient.save();
+                    });
+                }
+            });
+        }
+    });
+
+
+
+    // ******************************Payment Handeling below*****************
     
     //Here save all the details in pay object
     const pay = {};
@@ -22,11 +77,9 @@ router.post("/patient/:id/meeting/payment", isPatientLoggedIn, (req, res) => {
     pay.email            = req.user.username;
     pay.udf1             = req.user.lastName;
     pay.udf2             = req.user.phoneNumber;
-    pay.udf3             = req.body.time;
-    pay.udf4             = req.body.date;
     pay.service_provider = "payu_paisa";
 
-    // console.log(pay);
+    // Creating hashstring
     const hashString = 'xQRSB1rh'   //process.env.key store in in different file
      + '|' + pay.txnid
      + '|' + pay.amount       
@@ -35,9 +88,7 @@ router.post("/patient/:id/meeting/payment", isPatientLoggedIn, (req, res) => {
      + '|' + pay.email
      + '|' + pay.udf1   //lastname
      + '|' + pay.udf2   //phoneno.
-     + '|' + pay.udf3   //meeting time
-     + '|' + pay.udf4   //meeting date
-     + '|' + '||||||' 
+     + '|' + '||||||||' 
      + 'ojB0LSS5kW'       //process.env.salt store in in different file
 
     const sha = new jsSHA('SHA-512', "TEXT");
@@ -49,10 +100,10 @@ router.post("/patient/:id/meeting/payment", isPatientLoggedIn, (req, res) => {
     //We have to additionally pass merchant key to API
     //  so remember to include it.
     pay.key = "xQRSB1rh"     //process.env.key store in in different file;
-    pay.surl = 'http://eb8af80cf3f3.ngrok.io/payment/success/'+docid;
-    pay.furl = 'http://eb8af80cf3f3.ngrok.io/payment/fail';
+    pay.surl = 'http://b963a419f02d.ngrok.io/payment/success/'+docid;
+    pay.furl = 'http://b963a419f02d.ngrok.io/payment/fail';
     pay.hash = hash;
-
+    
     //Making an HTTP/HTTPS call with request
     request.post({
         headers: {
@@ -65,7 +116,7 @@ router.post("/patient/:id/meeting/payment", isPatientLoggedIn, (req, res) => {
         if (error) 
             res.send({status: false, message:error.toString()});
         if (httpRes.statusCode === 200) {
-        
+            
             res.send(body);
         } 
         else if (httpRes.statusCode >= 300 && httpRes.statusCode <= 400) {
@@ -88,7 +139,7 @@ router.post('/payment/success/:id', isPatientLoggedIn, (req, res) => {
     transaction.dateTime    = req.body.addedon;
     transaction.cardNumber  = req.body.cardnum;
     transaction.payuMoneyId = req.body.payuMoneyId;
-    
+
     // Finding the doctor from database
     User.findById(req.params.id, (err, doctor) => {
         if(err){
@@ -96,12 +147,15 @@ router.post('/payment/success/:id', isPatientLoggedIn, (req, res) => {
             res.redirect("/");
         }else{
             // Add payment details to database
-            Payment.create(transaction, (err, newTransaction) => {
+            Payment.create(transaction, async(err, newTransaction) => {
                 if(err){
                     console.log(err);
                     res.redirect("/");
                 }else{
-                    // adding patient details
+
+                    // *****************Payment details below********************
+
+                    // adding patient details to transaction
                     newTransaction.patient.id = req.user._id;
                     newTransaction.patient.firstName = req.user.firstName;
                     newTransaction.patient.lastName = req.user.lastName;
@@ -125,19 +179,15 @@ router.post('/payment/success/:id', isPatientLoggedIn, (req, res) => {
                         patient.save();
                     });
                 }
+                console.log("**Payment done and added to patient and doc");
             });
         }
     });
-    let meetingdetails = {
-        time: req.body.udf3,
-        date: req.body.udf4,
-        doctor_id: req.params.id
-    };
-    res.render("patient/patient_confirm_meeting", {meeting: meetingdetails});
+    res.redirect("/patient/profile");
 });
 
 
-router.post('/payment/fail/:id', (req, res) => {
+router.post('/payment/fail', (req, res) => {
     //Payumoney will send Fail Transaction data to req body. 
     //Based on the response Implement UI as per you want
     console.log("fail");

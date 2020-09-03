@@ -22,6 +22,7 @@ router.get("/patient/login", (req, res) =>{
 });
 
 router.get("/patient/profile", isPatientLoggedIn, (req,res)=>{
+    console.log("**profile route called**");
     User.findById(req.user._id).populate("meetings").exec((err, foundUser) => {
         if(err){
             console.log(err);
