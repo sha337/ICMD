@@ -12,57 +12,7 @@ const express       = require('express'),
 router.post("/patient/:id/meeting/payment", isPatientLoggedIn, (req, res) => {
     // save doctors id to pass it to success url
     let docid = req.params.id;
-    // save the meeting id for payment failure adn 
-    let meetingid = "";
-
-
-    let meetingdetails = {
-        time: req.body.time,
-        date: req.body.date
-    };
     
-    // creating a meeting in my database
-    // Finding the doctor from database
-    User.findById(req.params.id, (err, doctor)=>{
-        if(err){
-            console.log(err);
-            res.redirect("/");
-        }else{
-            
-            // Create a meeting in DB
-            Meeting.create(meetingdetails, (err, meeting)=>{
-                if(err){
-                    counsole.log(err);
-                    res.redirect("/");
-                }else{
-                    meetingid = meeting._id;
-                    // adding patient details
-                    meeting.patient.id = req.user._id;
-                    meeting.patient.firstName = req.user.firstName;
-                    meeting.patient.lastName = req.user.lastName;
-
-                    // adding doctor details
-                    meeting.doctor.id = doctor._id;
-                    meeting.doctor.firstName = doctor.firstName;
-                    meeting.doctor.lastName = doctor.lastName;
-
-                    // update meeting
-                    meeting.save();
-
-                    // push meeting in doctors database
-                    doctor.meetings.push(meeting);
-                    doctor.save();
-
-                    // Finding the patient
-                    User.findById(req.user._id, (err, patient)=>{
-                        // push the meeting in patient DB
-                        patient.meetings.push(meeting);
-                        patient.save();
-                    });
-                }
-            });
-        }
-    });
 
 
 
