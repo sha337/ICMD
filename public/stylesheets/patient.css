@@ -1,41 +1,44 @@
 
-.patient-home{
-  
-        margin: auto;
-        width: 80%;
-        /* border: 3px solid green; */
-        padding: 10px;
-        margin-top:50px;
-   
-}
 
 .patient-home .card{
-    max-width: 18rem;max-height: 18rem;
+   
     text-align: center;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5), 
                 0 4px 5px 0 rgba(0, 0, 0, 0.29);
 }
 
 .patient-home .card-header{
+    color: #004A7D;
     font-weight: 700;
     letter-spacing: 0.08rem;
-    font-size: 1.2rem;
-    text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
-    0px 8px 13px rgba(0, 0, 0, 0.1),
-    0px 18px 23px rgba(0, 0, 0, 0.1);
+    font-size: 1.3rem;
+    text-shadow: 0px 2px 7px rgba(0, 0, 0, 0.4),
+    0px 4px 8px rgba(0, 0, 0, 0.1),
+    0px 10px 13px rgba(0, 0, 0, 0.1);
 }
 
 .patient-home .card-body{
     background-color:white;
     color:black;
-    max-height: 12rem;
+   
 }
 
-.patient-home .card-body p:nth-of-type(2){
+.patient-home .card p a{
+    background-color: #004A7D;
+    width: 100%;
+    padding-top:10px;
+    /* height: 3rem; */
+    border-radius: 0px;
+    color: white;
+    font-size: 1.2rem;
+    margin:-10px
+} 
+
+/* .patient-home .card-body p:nth-of-type(2){
     text-align: center;
     font-size: 2rem;
     margin-top:-0.2rem;
-}
+} */
 
 .patient-home .card{
 	transition: transform 0.2s;
@@ -46,8 +49,3 @@
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.patient-home-img{
-    background-image: url("/imgs/doctor-10.jpg");
-    max-height: 200px;
-    display: block;
-}

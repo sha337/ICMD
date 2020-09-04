@@ -65,15 +65,18 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
         }
     });
 
+
+    // ***************Payment Logic Below*******************
+
     //Here save all the details in pay object
     let pay = {};
-    pay.txnid = uniqid.process();
-    pay.amount = req.body.amount;
-    pay.productinfo = "Payment for appointment";
-    pay.firstname = req.user.firstName;
-    pay.email = req.user.username;
-    pay.udf1 = req.user.lastName;
-    pay.udf2 = req.user.phoneNumber;
+    pay.txnid            = uniqid.process();
+    pay.amount           = req.body.amount;
+    pay.productinfo      = "Payment for appointment";
+    pay.firstname        = req.user.firstName;
+    pay.email            = req.user.username;
+    pay.udf1             = req.user.lastName;
+    pay.udf2             = req.user.phoneNumber;
     pay.service_provider = "payu_paisa";
     
     const hashString = "xQRSB1rh" //store in in different file

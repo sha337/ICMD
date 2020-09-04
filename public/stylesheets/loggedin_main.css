@@ -168,7 +168,7 @@ label #sidebar_btn:hover{
 }
 
 .content .card p{
-    background: rgb(216, 208, 208);
+    /* background: rgb(216, 208, 208); */
     padding: 15px;
     margin-bottom: 10px;
     font-size: 14px;
