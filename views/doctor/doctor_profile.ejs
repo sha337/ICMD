@@ -3,11 +3,11 @@
 
 
 
-
-
-  <div class="content">
+<!-- DashBoard Content Below -->
+<section class="dashboard-content content">
+  <div>
     <div class="card mb-5">
-      <a class="btn btn-lg btn-primary" href="/doctor/viewall"> Book An Appointment</a>
+      <a class="btn btn-lg btn-primary" href="#">Dashboard for doctors</a>
     </div>
     <div class="card mb-5">
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vero, ab, corrupti sapiente in recusandae unde autem eum veniam hic cumque modi, quis corporis. Ut aliquid nostrum recusandae dolorum enim.</p>
@@ -16,6 +16,81 @@
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vero, ab, corrupti sapiente in recusandae unde autem eum veniam hic cumque modi, quis corporis. Ut aliquid nostrum recusandae dolorum enim.</p>
     </div>
   </div>
+</section>
+
+
+<!-- Meeting Content Below -->
+<section class="meeting-content content">
+  <div class="card mb-5">
+    <a class="btn btn-lg btn-primary" href="#"> viewall meetings</a>
+  </div>
+
+  
+  <% User.meetings.forEach(function(meeting){ %>
+    <div class="row">
+        <div class="col-md-12">
+            <strong>Patient: <%= meeting.patient.firstName %></strong>
+            
+            <p>
+                <%= meeting.time %>
+            </p>
+            <p>
+              <%= meeting.date %>
+          </p>
+             
+        </div>
+    </div>
+<% }) %>
+</section>
+
+
+<!-- Prescription Content Below -->
+<section class="prescription-content content">
+  <div>
+    <div class="card mb-5">
+      <a class="btn btn-lg btn-primary" href="#">Prescriptions Given by Doctor</a>
+    </div>
+    <div class="card mb-5">
+      <p>Prescription content is here</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- payment Content Below -->
+<section class="payment-content content">
+  <div>
+    <div class="card mb-5">
+      <a class="btn btn-lg btn-primary" href="#"> viewall Payments</a>
+    </div>
+    <div class="card mb-5">
+      <p>payment details here</p>
+    </div>
+      <% User.payments.forEach( function(payment){ %>
+        <div class="card mb-5">
+                <strong>Patient: <%= payment.patient.firstName %> <%= payment.patient.lastName %></strong>
+                <p>status: <%= payment.status %></p>
+                <p>TxnId: <%= payment.txnid %></p>
+                <p>Amount: <%= payment.amount %></p>
+                <p>Payment Done on: <%= payment.dateTime %></p>
+                <p>payuMoneyId: <%= payment.payuMoneyId %></p>
+        </div>
+    <% }) %>
+  </div>
+</section>
+
+
+<!-- messages Content Below -->
+<section class="message-content content">
+  <div>
+    <div class="card mb-5">
+      <a class="btn btn-lg btn-primary" href="#"> view all messages</a>
+    </div>
+    <div class="card mb-5">
+      <p>All Messages here</p>
+    </div>
+  </div>
+</section>
 
 
 

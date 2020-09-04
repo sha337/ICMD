@@ -14,6 +14,56 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
     let doc_id = req.params.id;
     let pat_id = req.user._id;
 
+    // save the meeting id for payment failure adn 
+    let meetingid = "";
+
+    let meetingdetails = {
+        time: req.body.time,
+        date: req.body.date
+    };
+    
+    // creating a meeting in my database
+    // Finding the doctor from database
+    User.findById(doc_id, (err, doctor)=>{
+        if(err){
+            console.log(err);
+            res.redirect("/");
+        }else{
+            
+            // Create a meeting in DB
+            Meeting.create(meetingdetails, (err, meeting)=>{
+                if(err){
+                    counsole.log(err);
+                    res.redirect("/");
+                }else{
+                    meetingid = meeting._id;
+                    // adding patient details
+                    meeting.patient.id = req.user._id;
+                    meeting.patient.firstName = req.user.firstName;
+                    meeting.patient.lastName = req.user.lastName;
+
+                    // adding doctor details
+                    meeting.doctor.id = doctor._id;
+                    meeting.doctor.firstName = doctor.firstName;
+                    meeting.doctor.lastName = doctor.lastName;
+
+                    // update meeting
+                    meeting.save();
+
+                    // push meeting in doctors database
+                    doctor.meetings.push(meeting);
+                    doctor.save();
+
+                    // Finding the patient
+                    User.findById(req.user._id, (err, patient)=>{
+                        // push the meeting in patient DB
+                        patient.meetings.push(meeting);
+                        patient.save();
+                    });
+                }
+            });
+        }
+    });
 
     //Here save all the details in pay object
     let pay = {};
@@ -44,8 +94,8 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
     //We have to additionally pass merchant key to API
     //  so remember to include it.
     pay.key  = "xQRSB1rh" //store in in different file;
-    pay.surl = 'https://iconsultmydoctor.herokuapp.com/payment/success/'+doc_id+"/"+pat_id;
-    pay.furl = 'https://iconsultmydoctor.herokuapp.com/payment/fail';
+    pay.surl = 'http://iconsultmydoctor.herokuapp.com/payment/success/'+doc_id+"/"+pat_id;
+    pay.furl = 'http://iconsultmydoctor.herokuapp.com/payment/fail';
     pay.hash = hash;
     //Making an HTTP/HTTPS call with request
     request.post({

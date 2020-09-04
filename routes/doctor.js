@@ -19,7 +19,7 @@ router.get("/doctor/login", (req, res) =>{
 });
 
 router.get("/doctor/profile", isDoctorLoggedIn, (req,res)=>{
-    User.findById(req.user._id).populate("meetings").exec((err, foundUser) => {
+    User.findById(req.user._id).populate("meetings").populate("payments").exec((err, foundUser) => {
         if(err){
             console.log(err);
         }else{
