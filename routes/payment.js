@@ -9,7 +9,7 @@ const express       = require('express'),
 
 
 
-router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
+router.post('/payment_gateway/:id/payumoney', (req, res) => {
     // save doctors id to pass it to success url
     let doc_id = req.params.id;
 
@@ -24,7 +24,7 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
     pay.udf2 = req.user.phoneNumber;
     pay.service_provider = "payu_paisa";
     
-    console.log(pay)
+    // console.log(pay)
     
     const hashString = "xQRSB1rh" //store in in different file
         + '|' + pay.txnid
@@ -44,8 +44,8 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
         //We have to additionally pass merchant key to API
     //  so remember to include it.
     pay.key  = "xQRSB1rh" //store in in different file;
-    pay.surl = 'https://iconsultmydoctor.herokuapp.com/payment/success/'+doc_id;
-    pay.furl = 'https://iconsultmydoctor.herokuapp.com/payment/fail';
+    pay.surl = 'https://iconsultmydoctor.herokuapp.com//payment/success/'+doc_id;
+    pay.furl = 'https://iconsultmydoctor.herokuapp.com//payment/fail';
     pay.hash = hash;
     //Making an HTTP/HTTPS call with request
     request.post({
@@ -73,9 +73,10 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
 
 
 // if payment successful, this route is called
-router.post('/payment/success/:id', isPatientLoggedIn, (req, res) => {
+router.post('/payment/success/:id', (req, res) => {
     //Payumoney will send Success Transaction data to req body. 
     //  Based on the response Implement UI as per you want
+    console.log(req.user);
     let transaction = {};
     transaction.status      = req.body.status;
     transaction.txnid       = req.body.txnid;
@@ -102,7 +103,7 @@ router.post('/payment/success/:id', isPatientLoggedIn, (req, res) => {
                     newTransaction.patient.firstName = req.user.firstName;
                     newTransaction.patient.lastName = req.user.lastName;
 
-                    // adding doctor details
+                    // adding doctor details to transaction
                     newTransaction.doctor.id = doctor._id;
                     newTransaction.doctor.firstName = doctor.firstName;
                     newTransaction.doctor.lastName = doctor.lastName;
