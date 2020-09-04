@@ -9,9 +9,11 @@ const express       = require('express'),
 
 
 
-router.post('/payment_gateway/:id/payumoney', (req, res) => {
-    // save doctors id to pass it to success url
+router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
+    // save doctors id and patient id to pass it to success url
     let doc_id = req.params.id;
+    let pat_id = req.user._id;
+
 
     //Here save all the details in pay object
     let pay = {};
@@ -23,8 +25,6 @@ router.post('/payment_gateway/:id/payumoney', (req, res) => {
     pay.udf1 = req.user.lastName;
     pay.udf2 = req.user.phoneNumber;
     pay.service_provider = "payu_paisa";
-    
-    // console.log(pay)
     
     const hashString = "xQRSB1rh" //store in in different file
         + '|' + pay.txnid
@@ -41,11 +41,11 @@ router.post('/payment_gateway/:id/payumoney', (req, res) => {
     //Getting hashed value from sha module
     const hash = sha.getHash("HEX");
         
-        //We have to additionally pass merchant key to API
+    //We have to additionally pass merchant key to API
     //  so remember to include it.
     pay.key  = "xQRSB1rh" //store in in different file;
-    pay.surl = 'https://iconsultmydoctor.herokuapp.com/payment/success/'+doc_id;
-    pay.furl = 'https://iconsultmydoctor.herokuapp.com/payment/fail';
+    pay.surl = 'http://0cad66690353.ngrok.io/payment/success/'+doc_id+"/"+pat_id;
+    pay.furl = 'http://0cad66690353.ngrok.io/payment/fail';
     pay.hash = hash;
     //Making an HTTP/HTTPS call with request
     request.post({
@@ -73,10 +73,12 @@ router.post('/payment_gateway/:id/payumoney', (req, res) => {
 
 
 // if payment successful, this route is called
-router.post('/payment/success/:id', (req, res) => {
+router.post('/payment/success/:doc_id/:pat_id',  (req, res) => {
     //Payumoney will send Success Transaction data to req body. 
     //  Based on the response Implement UI as per you want
-    console.log(req.user);
+    
+    // console.log(req.user);           undefined, dont know why
+    
     let transaction = {};
     transaction.status      = req.body.status;
     transaction.txnid       = req.body.txnid;
@@ -85,44 +87,52 @@ router.post('/payment/success/:id', (req, res) => {
     transaction.cardNumber  = req.body.cardnum;
     transaction.payuMoneyId = req.body.payuMoneyId;
 
-    User.findById(req.params.id, (err, doctor) => {
+    // find the doctor from database
+    User.findById(req.params.doc_id, (err, doctor) => {
         if(err){
             console.log(err);
             console.log("error in payment success while finding doctor");
             res.redirect("/");
         }else{
-
-            Payment.create(transaction, (err, newTransaction) => {
+            // find the patient from data base
+            User.findById(req.params.pat_id, (err, patient) => {
                 if(err){
                     console.log(err);
-                    console.log("error in payment success while creating transaction");
+                    console.log("error in payment success while finding patient");
                     res.redirect("/");
-                }else{
-                    // adding patient details to transaction
-                    newTransaction.patient.id = req.user._id;
-                    newTransaction.patient.firstName = req.user.firstName;
-                    newTransaction.patient.lastName = req.user.lastName;
+                }
+                else{
+                    Payment.create(transaction, (err, newTransaction) => {
+                        if(err){
+                            console.log(err);
+                            console.log("error in payment success while creating transaction");
+                            res.redirect("/");
+                        }else{
+                            // adding patient details to transaction
+                            newTransaction.patient.id = patient._id;
+                            newTransaction.patient.firstName = patient.firstName;
+                            newTransaction.patient.lastName = patient.lastName;
+        
+                            // adding doctor details to transaction
+                            newTransaction.doctor.id = doctor._id;
+                            newTransaction.doctor.firstName = doctor.firstName;
+                            newTransaction.doctor.lastName = doctor.lastName;
+        
+                            // update payment
+                            newTransaction.save();
+        
+                            // push newTransaction in doctors database
+                            doctor.payments.push(newTransaction);
+                            doctor.save();
 
-                    // adding doctor details to transaction
-                    newTransaction.doctor.id = doctor._id;
-                    newTransaction.doctor.firstName = doctor.firstName;
-                    newTransaction.doctor.lastName = doctor.lastName;
-
-                    // update payment
-                    newTransaction.save();
-
-                    // push newTransaction in doctors database
-                    doctor.payments.push(newTransaction);
-                    doctor.save();
-
-                    // Finding the patient
-                    User.findById(req.user._id, (err, patient)=>{
-                        // push the meeting in patient DB
-                        patient.payments.push(newTransaction);
-                        patient.save();
+                            // push the meeting in patient DB
+                            patient.payments.push(newTransaction);
+                            patient.save();
+                        }
                     });
                 }
-            });
+                
+            });            
         }
     });
     res.redirect('/patient/profile');

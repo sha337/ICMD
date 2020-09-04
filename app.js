@@ -22,7 +22,7 @@ mongoose.connect("mongodb+srv://Ali:12345@shabz.1fu7s.mongodb.net/ICMD?retryWrit
 app.use(require("express-session")({
     secret: "ICMD",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
 }));
 app.use(passport.initialize());
 app.use(passport.session());
