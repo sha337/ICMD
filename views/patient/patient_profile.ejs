@@ -1,6 +1,40 @@
 <%- include("../partials/loggedin_header") %>
 
 
+<!-- Mobile Navigation bar start -->
+<div class="mobile_nav">
+  <div class="nav_bar">
+    <img src="/profile_images/<%=currentUser.profileImage%>" class="mobile_profile_image" alt="">
+    <i class="fa fa-bars nav_btn"></i>
+  </div>
+  <div class="mobile_nav_items">
+      <a href="#" class="dashboard"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+      <a href="#" class="meeting"><i class="far fa-calendar-plus"></i><span>Meetings</span></a>
+      <a href="#" class="prescription"><i class="fas fa-file-prescription"></i><span>Prescriptions</span></a>
+      <a href="#" class="payment"><i class="fas fa-credit-card"></i><span>Payments</span></a>
+      <a href="#" class="message"><i class="fas fa-info-circle"></i><span>Message</span></a>
+  </div>
+</div>
+<!-- Mobile Navigation bar end   -->
+
+
+
+<!-- sidebar start -->
+<div class="sidebar">
+  <div class="profile_info">
+    <img src="/profile_images/<%=currentUser.profileImage%>" class="profile_image" alt="">
+    <h4 style="color: white; font-family: Lora;"> <%= currentUser.firstName %> <%=currentUser.lastName%></h4>
+    
+  </div>
+  <a href="#" class="dashboard"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+  <a href="#" class="meeting"><i class="far fa-calendar-plus"></i><span>Meetings</span></a>
+  <a href="#" class="prescription"><i class="fas fa-file-prescription"></i><span>Prescriptions</span></a>
+  <a href="#" class="payment"><i class="fas fa-credit-card"></i><span>Payments</span></a>
+  <a href="#" class="message"><i class="fas fa-info-circle"></i><span>Message</span></a>
+
+</div>
+<!-- sidebar ends  -->
+
 
 
 <!-- DashBoard Content Below -->
@@ -62,39 +96,37 @@
 
 <!-- Meeting Content Below -->
 <section class="meeting-content content">
-  <div class="card mb-5">
-    <a class="btn btn-lg btn-primary" href="/doctor/viewall"> viewall meetings</a>
-  </div>
-
   
-  <% User.meetings.forEach(function(meeting){ %>
-    <div class="row">
-        <div class="col-md-12">
-          
-            <strong>Doctor: <%= meeting.doctor.firstName %></strong>
-            <strong>Patient: <%= meeting.patient.firstName %></strong>
-            
-            <p>
-                <%= meeting.time %>
-            </p>
-            <p>
-              <%= meeting.date %>
-          </p>
-             
+      <h5 style="margin-bottom: 2rem;font-weight: 700;letter-spacing: 1px;color: #004A7D;">ALL APPOINTMENTS</h5>
+
+  <% User.meetings.reverse().forEach(function(meeting){ %>
+
+        <div class="table-responsive">
+          <table class="table table-bordered" style="text-align: center;letter-spacing: 1.5px;">
+            <thead style="font-weight: 700;background-color: #EAF0F1">
+              <tr>
+                <td>Doctor</td>
+                <td>Date</td>
+                <td>Time</td>
+              </tr>
+              <tbody>
+                <tr>
+                  <td class="text-capitalize"><%= meeting.doctor.firstName %> <%= meeting.doctor.lastName %></td>
+                  <td><%= meeting.date %></td>
+                  <td><%= meeting.time %></td>
+                </tr>
+              </tbody>
+            </thead>
+          </table>
         </div>
-    </div>
-<% }) %>
-
-
+  <% }) %>
 </section>
 
 
 <!-- Prescription Content Below -->
 <section class="prescription-content content">
   <div>
-    <div class="card mb-5">
-      <a class="btn btn-lg btn-primary" href="/doctor/viewall"> viewall Prescriptions</a>
-    </div>
+    <h5 style="margin-bottom: 2rem;font-weight: 700;letter-spacing: 1px;color: #004A7D;">ALL PRESCRIPTIONS</h5>
     <div class="card mb-5">
       <p>Prescription content is here</p>
     </div>
@@ -143,9 +175,7 @@
 <!-- messages Content Below -->
 <section class="message-content content">
   <div>
-    <div class="card mb-5">
-      <a class="btn btn-lg btn-primary" href="/doctor/viewall"> view all messages</a>
-    </div>
+    <h5 style="margin-bottom: 2rem;font-weight: 700;letter-spacing: 1px;color: #004A7D;">MESSAGES: </h5>
     <div class="card mb-5">
       <p>All Messages here</p>
     </div>
