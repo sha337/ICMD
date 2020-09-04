@@ -44,8 +44,8 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
     //We have to additionally pass merchant key to API
     //  so remember to include it.
     pay.key  = "xQRSB1rh" //store in in different file;
-    pay.surl = 'http://0cad66690353.ngrok.io/payment/success/'+doc_id+"/"+pat_id;
-    pay.furl = 'http://0cad66690353.ngrok.io/payment/fail';
+    pay.surl = 'https://iconsultmydoctor.herokuapp.com/payment/success/'+doc_id+"/"+pat_id;
+    pay.furl = 'https://iconsultmydoctor.herokuapp.com/payment/fail';
     pay.hash = hash;
     //Making an HTTP/HTTPS call with request
     request.post({
