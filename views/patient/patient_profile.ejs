@@ -34,8 +34,11 @@
             <strong>Patient: <%= meeting.patient.firstName %></strong>
             
             <p>
-                <%= meeting.text %>
+                <%= meeting.time %>
             </p>
+            <p>
+              <%= meeting.date %>
+          </p>
              
         </div>
     </div>
@@ -66,11 +69,21 @@
 <section class="payment-content content">
   <div>
     <div class="card mb-5">
-      <a class="btn btn-lg btn-primary" href="/doctor/viewall"> viewall Payments</a>
+      <a class="btn btn-lg btn-primary" href="#"> viewall Payments</a>
     </div>
     <div class="card mb-5">
       <p>payment details here</p>
     </div>
+      <% User.payments.forEach( function(payment){ %>
+        <div class="card mb-5">
+                <strong>Doctor: <%= payment.doctor.firstName %> <%= payment.doctor.lastName %></strong>
+                <p>status: <%= payment.status %></p>
+                <p>TxnId: <%= payment.txnid %></p>
+                <p>Amount: <%= payment.amount %></p>
+                <p>Payment Done on: <%= payment.dateTime %></p>
+                <p>payuMoneyId: <%= payment.payuMoneyId %></p>
+        </div>
+    <% }) %>
   </div>
 </section>
 
