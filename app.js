@@ -13,8 +13,8 @@ const   express = require("express"),
 app.set("view engine", "ejs");
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
-mongoose.connect("mongodb://localhost:27017/ICMD", {useNewUrlParser: true, useUnifiedTopology: true});
-// mongoose.connect("mongodb+srv://Ali:12345@shabz.1fu7s.mongodb.net/ICMD?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect("mongodb://localhost:27017/ICMD", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://Ali:12345@shabz.1fu7s.mongodb.net/ICMD?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 
 
 
