@@ -1,40 +1,41 @@
 <%- include("../partials/header") %>
 
     <section style="margin-top:70px">
-        <% doctors.forEach(function(doctor){%>
-            <div class="container">
-                <div class="card">
-                    <div class="card-header">
-                      Department of Neurology
-                    </div>
-                    <div class="card-body">
-                      
-                        <% if(doctor.profileImage !== null) {%>
-                            <img src="/profile_images/<%=doctor.profileImage%>" alt="Avatar" class="avatar materialboxed" style="width: 100px;height: 100px;">
-                        <%}%>
-                      
-                        <h5 class="card-title">Dr.<%= doctor.firstName %> <%=doctor.lastName%></h5>
-                        <p class="card-text" style="font-size:0.9rem;font-weight: 300;">Contact : +91-<%=doctor.phoneNumber %></p>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <div class="container">
+            <div class="row">
+
+          
+            <% doctors.forEach(function(doctor){%>
+
+                    <div class="card" style="width: 30%; margin: 1.66%;">
+                        <div class="card-header">
+                        Department of Neurology
+                        </div>
+                        <div class="card-body">
                         
-                        <!-- <a href="#" class="btn btn-info">Get Appointment</a> -->
+                            <% if(doctor.profileImage !== null) {%>
+                                <img src="/profile_images/<%=doctor.profileImage%>" alt="Avatar" class="avatar materialboxed" style="width: 100px;height: 100px;">
+                            <%}%>
                         
-                        
-                        <form action="/payment_gateway/<%=doctor._id%>/payumoney" method="POST">
-                            <input class="form-control" type="text" name="amount" value="258" placeholder="amount">
-                            <input type="text" name="time" value="12:00-12:15" placeholder="message to doc">
-                            <input type="text" name="date" value="12/12/12" placeholder="message to doc">
-                            <button class="btn btn-info">Get Appointment</button>
-                        </form>
-                
-                    
-                    </div>
-                  </div>
-            </div>
-    
-        <% }) %>
-    
-    </section>
+                            <h5 class="card-title">Dr.<%= doctor.firstName %> <%=doctor.lastName%></h5>
+                            <p class="card-text" style="font-size:0.9rem;font-weight: 300;">Contact : +91-<%=doctor.phoneNumber %></p>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            
+                            <a href="/patient/login" class="btn btn-info">Get Appointment</a>
+                            
+                            
+                            <!-- <form action="/payment_gateway/<%=doctor._id%>/payumoney" method="POST">
+                                <input class="form-control" type="text" name="amount" value="258" placeholder="amount">
+                                <input type="text" name="time" value="12:00-12:15" placeholder="message to doc">
+                                <input type="text" name="date" value="12/12/12" placeholder="message to doc">
+                                <button class="btn btn-info">Get Appointment</button>
+                            </form> -->
+                        </div>
+                    </div>        
+            <% }) %>
+        </div>
+    </div>
+</section>
 
     <div style="margin-bottom: 3.5rem;"></div>
     
