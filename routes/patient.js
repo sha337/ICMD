@@ -83,8 +83,8 @@ router.get("/patient/logout", (req, res)=>{
 });
 
 router.get("/patient/failure", (req, res)=>{
-
-    res.send("Unsuccessful attempt patient");
+    console.log("Login failed");
+    res.redirect("/");
 });
 
 // ------------------------------Auth Routes Ends------------------------------
