@@ -31,6 +31,17 @@ router.get("/patient/profile", isPatientLoggedIn, (req,res)=>{
     });
 });
 
+router.get("/patient/profile/viewalldoctors", isPatientLoggedIn, (req, res) => {
+    User.find({userType:'doctor'},(err,doctors)=>{
+
+        if(err){
+            console.log(err)
+        }else{
+            res.render("patient/all_doctors",{doctors:doctors});
+        }
+    });
+});
+
 // -----------Auth Routes for patient-------------------------------------
 router.post("/patient/signup",upload.single('profileImage'), (req, res) => {
 

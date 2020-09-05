@@ -178,7 +178,7 @@ label #sidebar_btn:hover{
 
 
   
-/* Responsive CSS */
+/* Responsive CSS for dashboard*/
   
 @media screen and (max-width: 780px){
     .sidebar{
@@ -262,8 +262,10 @@ label #sidebar_btn:hover{
       display: block;
     }
 }
-                             
+
+/* Responsive CSS ends */
 /* 
 .content .card p {
   background-color: white;
 } */
+

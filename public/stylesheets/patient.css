@@ -41,7 +41,8 @@
 } */
 
 .patient-home .card{
-	transition: transform 0.2s;
+    transition: transform 0.2s;
+    transition: box-shadow 1s;
 }
 
 .patient-home .card:hover{
@@ -49,3 +50,11 @@
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.dashboard-button{
+    transition: box-shadow 0.2s;
+}
+
+.dashboard-button:hover{
+    transform: scale(1.0);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
