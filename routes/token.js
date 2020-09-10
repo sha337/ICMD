@@ -131,6 +131,7 @@ function refreshToken(){
                 token.access_token = body.access_token;
                 token.refresh_token = body.refresh_token;
                 token.save();
+                console.log("**token refreshed**");
             }
             
         });
