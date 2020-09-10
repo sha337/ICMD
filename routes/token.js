@@ -72,7 +72,7 @@ router.get('/newmeeting/:meet_id', (req, res) => {
             body: {
                 topic: "Doctor Consultation",
                 type: 2,                              
-                start_time: "2020-09-08T22:32:00",    // meeting start time
+                start_time: "2020-09-11T22:32:00",    // meeting start time
                 duration: 30,                       // 30 minutes
                 password: "123456",
                 setting: {
