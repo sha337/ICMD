@@ -1,5 +1,3 @@
-const meeting = require('../models/meeting');
-
 const express       = require('express'),
       router        = express.Router(),
       jsSHA         = require("jssha"),
@@ -102,8 +100,8 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, async (req, res
     //We have to additionally pass merchant key to API
     //  so remember to include it.
     pay.key  = "xQRSB1rh" //store in in different file;
-    pay.surl = 'http://bd6616fd8c55.ngrok.io/payment/success/'+doc_id+"/"+pat_id;
-    pay.furl = 'http://bd6616fd8c55.ngrok.io/payment/fail';
+    pay.surl = 'http://iconsultmydoctor.herokuapp.com/payment/success/'+doc_id+"/"+pat_id;
+    pay.furl = 'http://iconsultmydoctor.herokuapp.com/payment/fail';
     pay.hash = hash;
     //Making an HTTP/HTTPS call with request
     request.post({
@@ -131,7 +129,7 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, async (req, res
 
 
 // if payment successful, this route is called
-router.post('/payment/success/:doc_id/:pat_id',  async (req, res) => {
+router.post('/payment/success/:doc_id/:pat_id',  (req, res) => {
     //Payumoney will send Success Transaction data to req body. 
     //  Based on the response Implement UI as per you want
     
@@ -146,21 +144,21 @@ router.post('/payment/success/:doc_id/:pat_id',  async (req, res) => {
     transaction.payuMoneyId = req.body.payuMoneyId;
 
     // find the doctor from database
-    await User.findById(req.params.doc_id, async (err, doctor) => {
+    User.findById(req.params.doc_id, (err, doctor) => {
         if(err){
             console.log(err);
             console.log("error in payment success while finding doctor");
             res.redirect("/");
         }else{
             // find the patient from data base
-            await User.findById(req.params.pat_id, async (err, patient) => {
+            User.findById(req.params.pat_id, (err, patient) => {
                 if(err){
                     console.log(err);
                     console.log("error in payment success while finding patient");
                     res.redirect("/");
                 }
                 else{
-                    await Payment.create(transaction, (err, newTransaction) => {
+                    Payment.create(transaction, (err, newTransaction) => {
                         if(err){
                             console.log(err);
                             console.log("error in payment success while creating transaction");

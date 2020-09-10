@@ -54,27 +54,35 @@
 
 <!-- Meeting Content Below -->
 <section class="meeting-content content">
-  <div class="card mb-5">
-    <a class="btn btn-lg btn-primary" href="#"> viewall meetings</a>
-  </div>
-
   
-  <% User.meetings.forEach(function(meeting){ %>
-    <div class="row">
-        <div class="col-md-12">
-            <strong>Patient: <%= meeting.patient.firstName %></strong>
-            
-            <p>
-                <%= meeting.time %>
-            </p>
-            <p>
-              <%= meeting.date %>
-          </p>
-             
-        </div>
+  <h5 style="margin-bottom: 2rem;font-weight: 700;letter-spacing: 1px;color: #004A7D;">ALL APPOINTMENTS</h5>
+
+<% User.meetings.reverse().forEach(function(meeting){ %>
+
+    <div class="table-responsive">
+      <table class="table table-bordered" style="text-align: center;letter-spacing: 1.5px;">
+        <thead style="font-weight: 700;background-color: #EAF0F1">
+          <tr>
+            <td>Patient</td>
+            <td>Date</td>
+            <td>Time</td>
+            <td>Join</td>
+          </tr>
+          <tbody>
+            <tr>
+              <td class="text-capitalize"><%= meeting.patient.firstName %> <%= meeting.patient.lastName %></td>
+              <td><%= meeting.date %></td>
+              <td><%= meeting.time %></td>
+              <td><a href="<%= meeting.link %>" class="btn btn-primary">Join call</a></td>
+            </tr>
+          </tbody>
+        </thead>
+      </table>
     </div>
 <% }) %>
 </section>
+
+
 
 
 <!-- Prescription Content Below -->
@@ -93,21 +101,36 @@
 <!-- payment Content Below -->
 <section class="payment-content content">
   <div>
-    <div class="card mb-5">
-      <a class="btn btn-lg btn-primary" href="#"> viewall Payments</a>
-    </div>
-    <div class="card mb-5">
-      <p>payment details here</p>
-    </div>
-      <% User.payments.forEach( function(payment){ %>
-        <div class="card mb-5">
-                <strong>Patient: <%= payment.patient.firstName %> <%= payment.patient.lastName %></strong>
-                <p>status: <%= payment.status %></p>
-                <p>TxnId: <%= payment.txnid %></p>
-                <p>Amount: <%= payment.amount %></p>
-                <p>Payment Done on: <%= payment.dateTime %></p>
-                <p>payuMoneyId: <%= payment.payuMoneyId %></p>
-        </div>
+    
+      <h5 style="margin-bottom: 2rem;font-weight: 700;letter-spacing: 1px;color: #004A7D;">ALL PAYMENTS</h5>
+   
+      <% User.payments.reverse().forEach(function(payment){ %>
+             
+          <div class="table-responsive">
+            <table class="table table-bordered" style="text-align: center;letter-spacing: 1.5px;">
+              <thead style="font-weight: 700;background-color: #EAF0F1">
+                <tr>
+                  <td>Payment</td>
+                  <td>Status</td>
+                  <td>Transaction ID</td>
+                  <td>Amount</td>
+                  <td>Payment Date</td>
+                  <td>PayuMoneyID</td>
+                </tr>
+                <tbody>
+                  <tr>
+                    <td class="text-capitalize"><%= payment.patient.firstName %> <%= payment.patient.lastName %></td>
+                    <td class="text-capitalize"><%= payment.status %></td>
+                    <td><%= payment.txnid %></td>
+                    <td><%= payment.amount %></td>
+                    <td><%= payment.dateTime %></td>
+                    <td><%= payment.payuMoneyId %></td>
+                  </tr>
+                </tbody>
+              </thead>
+            </table>
+          </div>
+       
     <% }) %>
   </div>
 </section>
