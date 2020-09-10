@@ -48,9 +48,10 @@ const doctorRoutes  = require("./routes/doctor");
 const patientRoutes = require("./routes/patient");
 const meetingRoutes = require("./routes/meeting");
 const paymentRoutes = require("./routes/payment");
-
+const tokenRoutes   = require("./routes/token");
 
 // using routes
+app.use(tokenRoutes);
 app.use(doctorRoutes);
 app.use(patientRoutes);
 app.use(meetingRoutes);

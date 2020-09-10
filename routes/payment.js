@@ -1,3 +1,5 @@
+const meeting = require('../models/meeting');
+
 const express       = require('express'),
       router        = express.Router(),
       jsSHA         = require("jssha"),
@@ -5,23 +7,23 @@ const express       = require('express'),
       uniqid        = require('uniqid'),
       User          = require("../models/user"),
       Meeting       = require("../models/meeting"),
-      Payment       = require("../models/payment");
+      Payment       = require("../models/payment"),
+      Token         = require("../models/token"),
+      async = require('async'),
+      await = require('await');
 
 
 
-router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
+router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, async (req, res) => {
     // save doctors id and patient id to pass it to success url
     let doc_id = req.params.id;
     let pat_id = req.user._id;
-
-    // save the meeting id for payment failure adn 
-    let meetingid = "";
 
     let meetingdetails = {
         time: req.body.time,
         date: req.body.date
     };
-    
+
     // creating a meeting in my database
     // Finding the doctor from database
     User.findById(doc_id, (err, doctor)=>{
@@ -36,11 +38,13 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
                     counsole.log(err);
                     res.redirect("/");
                 }else{
-                    meetingid = meeting._id;
+                    console.log(meeting);
+                    meet_id = meeting._id;
+                    
                     // adding patient details
-                    meeting.patient.id = req.user._id;
+                    meeting.patient.id        = req.user._id;
                     meeting.patient.firstName = req.user.firstName;
-                    meeting.patient.lastName = req.user.lastName;
+                    meeting.patient.lastName  = req.user.lastName;
 
                     // adding doctor details
                     meeting.doctor.id = doctor._id;
@@ -59,12 +63,13 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
                         // push the meeting in patient DB
                         patient.meetings.push(meeting);
                         patient.save();
+                        console.log("Meeting Created");
                     });
                 }
             });
         }
-    });
-
+    })
+    
 
     // ***************Payment Logic Below*******************
 
@@ -97,8 +102,8 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
     //We have to additionally pass merchant key to API
     //  so remember to include it.
     pay.key  = "xQRSB1rh" //store in in different file;
-    pay.surl = 'http://iconsultmydoctor.herokuapp.com/payment/success/'+doc_id+"/"+pat_id;
-    pay.furl = 'http://iconsultmydoctor.herokuapp.com/payment/fail';
+    pay.surl = 'http://bd6616fd8c55.ngrok.io/payment/success/'+doc_id+"/"+pat_id;
+    pay.furl = 'http://bd6616fd8c55.ngrok.io/payment/fail';
     pay.hash = hash;
     //Making an HTTP/HTTPS call with request
     request.post({
@@ -126,7 +131,7 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, (req, res) => {
 
 
 // if payment successful, this route is called
-router.post('/payment/success/:doc_id/:pat_id',  (req, res) => {
+router.post('/payment/success/:doc_id/:pat_id',  async (req, res) => {
     //Payumoney will send Success Transaction data to req body. 
     //  Based on the response Implement UI as per you want
     
@@ -141,21 +146,21 @@ router.post('/payment/success/:doc_id/:pat_id',  (req, res) => {
     transaction.payuMoneyId = req.body.payuMoneyId;
 
     // find the doctor from database
-    User.findById(req.params.doc_id, (err, doctor) => {
+    await User.findById(req.params.doc_id, async (err, doctor) => {
         if(err){
             console.log(err);
             console.log("error in payment success while finding doctor");
             res.redirect("/");
         }else{
             // find the patient from data base
-            User.findById(req.params.pat_id, (err, patient) => {
+            await User.findById(req.params.pat_id, async (err, patient) => {
                 if(err){
                     console.log(err);
                     console.log("error in payment success while finding patient");
                     res.redirect("/");
                 }
                 else{
-                    Payment.create(transaction, (err, newTransaction) => {
+                    await Payment.create(transaction, (err, newTransaction) => {
                         if(err){
                             console.log(err);
                             console.log("error in payment success while creating transaction");
@@ -184,11 +189,13 @@ router.post('/payment/success/:doc_id/:pat_id',  (req, res) => {
                         }
                     });
                 }
-                
-            });            
+            });  
+            
+            let meetings = doctor.meetings;
+            let meet_id = meetings[meetings.length - 1]._id;
+            res.redirect('/newmeeting/'+meet_id);   
         }
     });
-    res.redirect('/patient/profile');
 });
 
 
@@ -197,7 +204,6 @@ router.post('/payment/fail', (req, res) => {
     console.log(req.body);
     res.send("payment Failed");
 });
-
 
 
 
@@ -211,6 +217,9 @@ function isPatientLoggedIn(req, res, next){
     req.logout();
     res.redirect("/patient/login");
 }
+
+
+
 
 
 module.exports = router;

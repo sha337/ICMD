@@ -19,7 +19,8 @@ let meetingSchema = new mongoose.Schema({
         lastName: String
     },
     time: String,
-    date: String 
+    date: String,
+    link: String 
 });
 
 module.exports = mongoose.model("Meeting", meetingSchema);

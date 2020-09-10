@@ -108,12 +108,14 @@
                 <td>Doctor</td>
                 <td>Date</td>
                 <td>Time</td>
+                <td>Join</td>
               </tr>
               <tbody>
                 <tr>
                   <td class="text-capitalize"><%= meeting.doctor.firstName %> <%= meeting.doctor.lastName %></td>
                   <td><%= meeting.date %></td>
                   <td><%= meeting.time %></td>
+                  <td><a href="<%= meeting.link %>" class="btn btn-primary">Join call</a></td>
                 </tr>
               </tbody>
             </thead>

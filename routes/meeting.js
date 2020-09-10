@@ -43,9 +43,10 @@ router.post("/patient/:id/meeting", isPatientLoggedIn, (req,res) =>{
                         // push the meeting in patient DB
                         patient.meetings.push(meeting);
                         patient.save();
+                        return meeting
                     });
                     
-                    res.redirect("/patient/profile");
+                    // res.redirect("/patient/profile");
                 }
             });
         }
