@@ -116,6 +116,7 @@ router.get('/newmeeting/:meet_id', (req, res) => {
 
 
 function refreshToken(){
+    console.log("Refresh token function called");
     Token.findOne({id:'1'}, (err, token)=>{
         var options = {
             method: 'POST',
