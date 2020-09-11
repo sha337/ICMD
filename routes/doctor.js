@@ -3,7 +3,8 @@ const express       = require("express"),
       passport      = require("passport"),
       LocalStrategy = require("passport-local"),
       User          = require("../models/user"),
-      upload        = require("../handlers/multer");
+      upload        = require("../handlers/multer"),
+      moment        = require('moment');
 
       
 router.get("/doctor", (req, res) => {
@@ -55,11 +56,11 @@ router.post("/doctor/signup",upload.single('profileImage'),(req, res) => {
         username: req.body.username,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        phoneNumber: req.body.phoneNumber,
-        gender: req.body.gender, 
-        age: req.body.age,
+        // phoneNumber: req.body.phoneNumber,
+        // gender: req.body.gender, 
+        // age: req.body.age,
         userType: req.body.userType,
-        profileImage:req.file.filename
+        // profileImage:req.file.filename
         // mciLicense: req.body.mciLicense,
         // specialization: req.body.specialization,
         // referenceFirstName1: req.body.referenceFirstName1,
@@ -70,8 +71,12 @@ router.post("/doctor/signup",upload.single('profileImage'),(req, res) => {
         // referenceLastName2: req.body.referenceLastName2,
         // referenceEmail2: req.body.referenceEmail2,
         // referencePhoneNumber2: req.body.eferencePhoneNumber2
+        startTime: req.body.startTime,
+        endTime: req.body.endTime,
+        duration: req.body.duration,
+        availableSlots: intervals(req.body.startTime, req.body.endTime, parseInt(req.body.duration))
     });
-
+    console.log(newDoctor);
     User.register(newDoctor, req.body.password, (err, doctor) =>{
         if(err){
             console.log(err);
@@ -118,5 +123,25 @@ function isDoctorLoggedIn(req, res, next){
 
 // --------------------------------------------
 
+// divide time in intervals
+function intervals(startString, endString, duration) {
+    var start = moment(startString, 'hh:mm a');
+    var end = moment(endString, 'hh:mm a');
+
+    // round starting minutes up to nearest 15 (12 --> 15, 17 --> 30)
+    // note that 59 will round up to 60, and moment.js handles that correctly
+    start.minutes(Math.ceil(start.minutes() / 15) * 15);
+
+    var result = [];
+
+    var current = moment(start);
+
+    while (current <= end) {
+        result.push(current.format('HH:mm'));
+        current.add(duration, 'minutes');
+    }
+
+    return result;
+}
 
 module.exports = router;

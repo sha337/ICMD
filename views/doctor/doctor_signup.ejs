@@ -17,6 +17,7 @@
                                         <!-- default user type -->
                                         <input type="text" name="userType" value="doctor" hidden>
 
+                                        <!-- First Name -->
                                         <div class="form-group">
                                             <label for="name" class="cols-sm-2 control-label" >First Name</label>
                                             <div class="cols-sm-10">
@@ -26,15 +27,19 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Last Name -->
                                         <div class="form-group">
                                             <label for="name" class="cols-sm-2 control-label" >Last Name</label>
                                             <div class="cols-sm-10">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"></span>
-                                                    <input style="margin-left: -5px;" type="text" class="form-control" name="lastName" id="email" placeholder="Enter your Last Name"/>
+                                                    <input style="margin-left: -5px;" type="text" class="form-control" name="lastName" id="lastname" placeholder="Enter your Last Name"/>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- E-mail -->
                                         <div class="form-group">
                                             <label for="email" class="cols-sm-2 control-label" >E-Mail</label>
                                             <div class="cols-sm-10">
@@ -45,7 +50,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
+                                        <!-- Phone Number -->
+                                        <!-- <div class="form-group">
                                             <label for="email" class="cols-sm-2 control-label" >Phone Number</label>
                                             <div class="cols-sm-10">
                                                 <div class="input-group">
@@ -53,9 +59,10 @@
                                                     <input style="margin-left: -5px;" type="text" class="form-control" name="phoneNumber" id="email" placeholder="Enter your Phone Number"/>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
 
-                                        <div class="form-group">
+                                        <!-- Gender -->
+                                        <!-- <div class="form-group">
                                             <label for="email" class="cols-sm-2 control-label" >Gender</label>
                                             <div class="cols-sm-10">
                                                 <div class="input-group">
@@ -69,9 +76,10 @@
                                                     
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
 
-                                        <div class="form-group">
+                                        <!-- Age -->
+                                        <!-- <div class="form-group">
                                             <label for="email" class="cols-sm-2 control-label">Age</label>
                                             <div class="cols-sm-10">
                                                 <div class="input-group">
@@ -79,14 +87,47 @@
                                                     <input style="margin-left: -5px;" type="text" class="form-control" name="age" id="email" placeholder="Enter your Age"/>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
 
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label for="profile-picture" class="cols-sm-2 control-label" >Profile Picture</label>
                                             <div class="cols-sm-10">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"></span>
                                                     <input style="margin-left: -5px;" type="file" class="form-control" name="profileImage" id="profile"/>
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+                                        <!-- Start Time -->
+                                        <div class="form-group">
+                                            <label for="email" class="cols-sm-2 control-label">Start Time</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"></span>
+                                                    <input style="margin-left: -5px;" type="text" class="form-control time" name="startTime" id="start-time" placeholder="Enter your start-time"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                         <!-- End Time -->
+                                         <div class="form-group">
+                                            <label for="email" class="cols-sm-2 control-label">End Time</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"></span>
+                                                    <input style="margin-left: -5px;" type="text" class="form-control time" name="endTime" id="end-time" placeholder="Enter your end-time"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                         <!-- Duration -->
+                                         <div class="form-group">
+                                            <label for="email" class="cols-sm-2 control-label">Duration</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"></span>
+                                                    <input style="margin-left: -5px;" type="text" class="form-control" name="duration" id="duration" placeholder="Enter your duration"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -218,8 +259,6 @@
                                         </div> -->
 
 
-
-
                                         <div class="form-group ">
                                             
                                             <button type="submit" class="btn btn-success btn-lg btn-block login-button" style="border-radius: 0px;background-color: #004A7D;">Register</button>
@@ -240,5 +279,18 @@
 </div>
 
     <div style="margin-top:1.5em;">
+
+
+<script>
+    $(".time").datetimepicker({
+        datepicker:false,
+        step: 15,
+        ampm: true, // FOR AM/PM FORMAT
+        showSecond: true,
+        format : 'h:i:s A'
+    });
+</script>
+      
+        
 
 <%- include("../partials/footer") %>

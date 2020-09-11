@@ -3,15 +3,15 @@ const passportLocalMongoose = require("passport-local-mongoose");
 
 let userSchema = new mongoose.Schema({
     // Common to all three - patient, doctor, admin
-    username:String,    //email as username
-    firstName:String,
-    lastName:String,
-    password:String,
-    gender:String,      //dropdown
-    age:Number,
-    phoneNumber: String,
-    userType: String,
-    profileImage:String,
+    username:     String,    //email as username
+    firstName:    String,
+    lastName:     String,
+    password:     String,
+    gender:       String,      //dropdown
+    age:          Number,
+    phoneNumber:  String,
+    userType:     String,
+    profileImage: String,
     joiningDate: {type: Date, default: Date.now},
 
     // Specific to Doctors Only
@@ -25,6 +25,10 @@ let userSchema = new mongoose.Schema({
     referenceLastName2: String,
     referenceEmail2: String,
     referencePhoneNumber2: String,
+    startTime: String,
+    endTime: String,
+    duration: Number,
+    availableSlots: [],
 
     // meetings attended
     meetings: [
