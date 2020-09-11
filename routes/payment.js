@@ -19,7 +19,7 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, async (req, res
 
     let meetingdetails = {
         time: req.body.time,
-        date: req.body.date
+        date: req.body.dateofapp
     };
 
     // creating a meeting in my database

@@ -57,7 +57,7 @@ router.get('/gettoken', (req, res) => {
     res.redirect('https://zoom.us/oauth/authorize?response_type=code&client_id=' + clientID + '&redirect_uri=' + redirectURL)
 });
 
-
+// this route genrates zoom meeting link
 router.get('/newmeeting/:meet_id', (req, res) => {
 
     Token.findOne({id:'1'}, (err, token)=>{
