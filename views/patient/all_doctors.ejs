@@ -26,7 +26,7 @@
                             
                             <form action="/payment_gateway/<%=doctor._id%>/payumoney" method="POST">
                                 <input class="form-control" type="text" name="amount" value="258" placeholder="amount">
-                                <input class="form-control" type="text" name="time" value="12:00-12:15" placeholder="message to doc">
+                                <!-- <input class="form-control" type="text" name="time" value="12:00-12:15" placeholder="message to doc"> -->
                                 <input class="form-control datetime" type="text" name="dateofapp" placeholder="select date">
                                 
                                 <button class="btn btn-info">Get Appointment</button>
@@ -38,7 +38,7 @@
     </div>
 </section>
 
-    <div style="margin-bottom: 3.5rem;"></div>
+<div style="margin-bottom: 3.5rem;"></div>
     
     
-    <%- include("../partials/loggedin_footer") %>
+<%- include("../partials/loggedin_footer") %>
