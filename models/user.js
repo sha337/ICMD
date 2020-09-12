@@ -3,7 +3,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 
 let userSchema = new mongoose.Schema({
     // Common to all three - patient, doctor, admin
-    username:     String,    //email as username
+    username:     {type: String, unique: true, required: true},    //email as username
     firstName:    String,
     lastName:     String,
     password:     String,
@@ -29,6 +29,10 @@ let userSchema = new mongoose.Schema({
     endTime: String,
     duration: Number,
     availableSlots: [],
+
+    // below 2 properties for forgot password
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
 
     // meetings attended
     meetings: [
