@@ -1,35 +1,53 @@
-/* navbar background color */
-.navbar{
-	background-color: rgba(245, 245, 245, 0.5);
-	min-height: 100px;
-    /* height: 100px; */
-}
-
-
-.navbar-brand{
-	color: rgba(0, 0, 0);
-    font-family: Simonetta;
-    font-weight: 900;
-    font-size: large;
-}
-
-.navbar .navbar-brand{
-
-    font-family: Simonetta;
-    font-weight: 900;
-	font-size: large;
-	text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
-				 0px 8px 13px rgba(0, 0, 0, 0.1),
-				 0px 18px 23px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-dark .navbar-nav .nav-link:hover {
-    color: rgba(0, 0, 0);
-}
-
 body, html {
 	height: 100%;
 }
+
+
+/* navbar background color */
+.navbar{
+	background-color: #008dc9;
+	min-height: 75px;
+	padding-left: 0;
+    /* height: 100px; */
+}
+
+/* items on navbar */
+.navbar-dark .navbar-nav .active > .nav-link{
+	color: white;
+	text-transform: uppercase;
+	margin-top: 0;
+	font: normal 16px 'Open Sans', sans-serif;
+}
+
+.navbar-dark .navbar-nav .active > .nav-link:hover{
+	text-decoration: underline;
+}
+
+
+@media (min-width: 992px){
+	.container {
+		max-width: 992px;
+	}
+}
+
+@media (min-width: 1200px){
+	.container {
+		max-width: 100%;
+	}
+}
+
+.navbar-dark .navbar-toggler {
+    color: rgb(255, 255, 255);
+    border-color: rgb(255, 255, 255);
+}
+
+
+.navbar .navbar-brand{
+    font-family: 'Open Sans';
+    font-weight: 600;
+}
+
+
 
 #content{
 	text-align: center;
@@ -91,47 +109,76 @@ body, html {
 
 /* Home Page CSS */
 .home-page-landing-image{
-	background-image: url("/imgs/Doctor 6.jpg");
+	background-image: url("/imgs/home-background.jpg");
 	background-position: center;
 	display: block;
 	background-repeat: no-repeat;
 	background-size: cover;
-	height: 80%;
+	height: 95%;
+	margin-top: 0;
 }
 
 .home-page-landing-text{
-	padding-top: 12%;
-	padding-left: 5%;
-	
+	padding-top: 8%;
+	padding-left: 4%;
 	color: #000000;
-	
 }
 
 .home-page-landing-text p{
-	font-family: 'Poppins';
+	font-family: 'Open Sans';
 	font-weight: 400;
-	line-height: 1.6;
-	/* text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
-				 0px 8px 13px rgba(0, 0, 0, 0.1),
-				 0px 18px 23px rgba(0, 0, 0, 0.1); */
+	font-size: 20px;
+	line-height: 26px;
 }
 
 .home-page-landing-text h1{
-	font-family: 'Playfair Display';
-	font-weight: 600;
-	font-size: 2.8em;
-	text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
-				 0px 8px 13px rgba(0, 0, 0, 0.1),
-				 0px 18px 23px rgba(0, 0, 0, 0.1);
-	
+	font-family: 'Open Sans';
+	font-weight: 400;
+	font-size: 48px;	
 }
 
-.home-page-landing-text a{
-	text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
-				 0px 8px 13px rgba(0, 0, 0, 0.1),
-				 0px 18px 23px rgba(0, 0, 0, 0.1);
-	
+
+/* tagline on home page css start*/
+.home-page-tagline{
+	padding-left: 4%;
+	padding-top: 1%;
 }
+.home-page-tagline h2{
+	color:  #008dc9;
+	font-family: 'Open Sans';
+	font-weight: 700;
+	padding-bottom: 0;
+	margin-bottom: 5px;
+}
+.home-page-tagline hr{
+	padding: 0;
+	margin: 0;
+	width: 280px;
+	border: 1px solid white;
+}
+.home-page-tagline p{
+	font-family: 'Open Sans';
+	font-size: 19px;
+	color: white;
+	font-weight: 600;
+	padding-top: 0;
+	margin-top: 0;
+}
+/* tagline on home page css ends*/
+
+.home-page-landing-text a{
+	background: linear-gradient(to bottom, #71df54 0%, #30a039 100%);
+	color: white;
+	font-family: 'Open Sans';
+	font-weight: 400;
+	width: 200px;
+	border-radius: 5px;
+}
+
+.home-page-landing-text a:hover{
+	color: white;
+}
+
 
 .home-registration-text h1{
 	text-align: center;

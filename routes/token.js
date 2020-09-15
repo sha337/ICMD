@@ -32,17 +32,15 @@ router.get('/gettoken', (req, res) => {
             console.log(`refresh_token: ${body.refresh_token}`);
             
             // save the token in database
-            let tokenDetails = {
-                id: "1",
-                access_token: body.access_token,
-                refresh_token: body.refresh_token
-            };
-            console.log("Adding to database");
-            Token.create(tokenDetails, (err, token)=>{
+
+            Token.findOne({id: "1"}, (err, token)=>{
                 if(err){
                     console.log(err);
                     res.redirect('/');
                 }else{
+                    token.access_token = body.access_token;
+                    token.refresh_token = body.refresh_token;
+                    token.save();
                     console.log("token added to databse");
                     res.redirect('/');
                 }

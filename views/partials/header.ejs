@@ -29,6 +29,7 @@
         <!-- new fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@200;300;400&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css">
@@ -58,29 +59,29 @@
     <body>
         <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
-  
+        
 
         <!-- Navbar Starts-------------------------- -->
-        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-dark">
             <div class="container">
-                <a class="navbar-brand" href="/" style="font-size: 1.8rem;letter-spacing: 0.16rem;color:#004A7D"><i class="fa fa-heartbeat" style="font-size:2.0rem;color:#AE1438"></i> <span style="color:#AE1438">i</span>consultmydoctor</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="/" style=" font-size: 1.4rem;color:white"><img src="/imgs/logo/white-heart.png" alt="" style="height: 40px; width: 50px; margin-right: 5px; margin-top: 0;"class="d-inline-block align-top"><span style="color:white">ICMD</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" style="color: white;">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="font-size: 0.95rem;">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
-                            <a href="/doctor/viewall" class="nav-link" style="margin:8px;font-weight: 400; font-family: 'Poppins';">Our Doctors</a>
+                            <a href="/doctor/viewall" class="nav-link">Our Doctors</a>
                         </li>
                         <li class="nav-item active">
-                            <a href="#" class="nav-link" style="margin:8px;font-weight: 400; font-family: 'Poppins'">How It Works</a>
+                            <a href="#" class="nav-link">How It Works</a>
                         </li>
+                        <!-- <li class="nav-item active">
+                            <a href="#" class="nav-link"">ICMD Club Member</a>
+                        </li> -->
                         <li class="nav-item active">
-                            <a href="#" class="nav-link" style="margin:8px;font-weight: 400; font-family: 'Poppins'">ICMD Club Member</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a href="#" class="nav-link" style="margin:8px; font-weight: 400; font-family: 'Poppins'">About</a>
+                            <a href="#" class="nav-link">About</a>
                         </li>
                     </ul>
                     
@@ -88,17 +89,17 @@
                     <ul class="navbar-nav ml-auto">
                         <% if( !currentUser ){ %>
                             <li class="nav-item active">
-                                <a href="/patient/login" class="nav-link" style="font-weight: 400; font-family: 'Poppins'">For Patients</a>
+                                <a href="/patient/login" class="nav-link">For Patients</a>
                             </li>
                             <li class="nav-item active">
-                                <a href="/doctor/login" class="nav-link" style="font-weight: 400; font-family: 'Poppins'">For Doctors</a>
+                                <a href="/doctor/login" class="nav-link">For Doctors</a>
                             </li>
                         <%} else {%>
                             <li class="nav-item active">
-                                <a href="/<%=currentUser.userType%>/profile" class="nav-link text-capitalize" style="font-weight: 700; font-family:'Poppins'">Welcome <%= currentUser.firstName %></a>
+                                <a href="/<%=currentUser.userType%>/profile" class="nav-link" >Welcome <%= currentUser.firstName %></a>
                             </li>
                             <li class="nav-item active">
-                                <a href="/<%=currentUser.userType%>/logout" class="nav-link" style="font-weight: 700; font-family: 'Poppins'">Logout</a>
+                                <a href="/<%=currentUser.userType%>/logout" class="nav-link" >Logout</a>
                             </li>
                             <% if(currentUser.profile_images !== null){ %>
                             <li class="nav-item active">
