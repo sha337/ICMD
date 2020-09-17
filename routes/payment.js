@@ -176,7 +176,7 @@ router.post('/payment/success/:doc_id/:pat_id/:meet_id',  (req, res) => {
                 }
             });  
             
-            res.redirect('/newmeeting/'+meet_id);   
+            res.redirect('/newmeeting/'+req.params.meet_id);   
         }
     });
 });
