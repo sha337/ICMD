@@ -1,3 +1,6 @@
+//*******CREATE MEETNG IS CURRENTLY HAPPENING IN PAYMENT ROUTE***************/
+
+
 const express       = require('express'),
       router        = express.Router(),
       User          = require("../models/user"),

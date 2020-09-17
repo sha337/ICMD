@@ -99,7 +99,7 @@
       <h5 style="margin-bottom: 2rem;font-weight: 700;letter-spacing: 1px;color: #004A7D;">ALL APPOINTMENTS</h5>
 
   <% User.meetings.reverse().forEach(function(meeting){ %>
-
+      <%if(meeting.payment===true){ %>
         <div class="table-responsive">
           <table class="table table-bordered" style="text-align: center;letter-spacing: 1.5px;">
             <thead style="font-weight: 700;background-color: #EAF0F1">
@@ -120,6 +120,7 @@
             </thead>
           </table>
         </div>
+      <%}%>
   <% }) %>
 </section>
 

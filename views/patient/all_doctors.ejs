@@ -26,8 +26,8 @@
                             
                             <form action="/payment_gateway/<%=doctor._id%>/payumoney" method="POST">
                                 <input class="form-control" type="text" name="amount" value="258" placeholder="amount">
-                                <input class="form-control" type="text" name="time" value="12:00-12:15" placeholder="message to doc">
-                                <input class="form-control datetime" type="text" name="dateofapp" placeholder="select date">
+                                <input class="form-control" type="text" name="time" value="12:00:00" placeholder="message to doc">
+                                <input class="form-control datetime" type="text" name="dateofapp" placeholder="select date" autocomplete="off">
                                 
                                 <button class="btn btn-info">Get Appointment</button>
                             </form>
@@ -45,7 +45,7 @@
     $(".datetime").datetimepicker({
       minDate: 0,
       timepicker:false,
-      format:'d-m-Y'
+      format:'Y-m-d'
     });
 
   </script>

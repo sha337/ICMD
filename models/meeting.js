@@ -20,7 +20,8 @@ let meetingSchema = new mongoose.Schema({
     },
     time: String,
     date: String,
-    link: String 
+    link: String,
+    payment: Boolean 
 });
 
 module.exports = mongoose.model("Meeting", meetingSchema);

@@ -5,22 +5,22 @@ const express       = require("express"),
       User          = require("../models/user"),
       upload        = require("../handlers/multer");
     
-
+// displays Patients landing page with login and signup option ( discontinued - currently login page opens directly)
 router.get("/patient",(req,res)=>{
-
     res.render("patient/patient_landing_page");
 });
 
+// displays signup form for patient
 router.get("/patient/signup",(req,res)=>{
-
     res.render("patient/patient_signup");
 });
 
+// displays login form for patient
 router.get("/patient/login", (req, res) =>{
-    
     res.render("patient/patient_login");
 });
 
+// displays profile page for patient after login
 router.get("/patient/profile", isPatientLoggedIn, (req,res)=>{
     User.findById(req.user._id).populate("meetings").populate("payments").exec((err, foundUser) => {
         if(err){
@@ -31,6 +31,7 @@ router.get("/patient/profile", isPatientLoggedIn, (req,res)=>{
     });
 });
 
+// Displays all doctors if patients is logged in 
 router.get("/patient/profile/viewalldoctors", isPatientLoggedIn, (req, res) => {
     User.find({userType:'doctor'},(err,doctors)=>{
 
@@ -42,10 +43,10 @@ router.get("/patient/profile/viewalldoctors", isPatientLoggedIn, (req, res) => {
     });
 });
 
+
 // -----------Auth Routes for patient-------------------------------------
+// SIgn up route for patient
 router.post("/patient/signup",upload.single('profileImage'), (req, res) => {
-
-
     let newPatient=new User({
         // First attribute has to be the username for proper registration of the user
         username: req.body.username,
@@ -70,6 +71,7 @@ router.post("/patient/signup",upload.single('profileImage'), (req, res) => {
     });
 });
 
+// login route for patient
 router.post("/patient/login", passport.authenticate("local",{
     successRedirect: "/patient/profile",
     failureRedirect: "/patient/failure"
@@ -77,11 +79,13 @@ router.post("/patient/login", passport.authenticate("local",{
         
 });
 
+// logout route for patient
 router.get("/patient/logout", (req, res)=>{
     req.logout();
     res.redirect("/");
 });
 
+// login failure route
 router.get("/patient/failure", (req, res)=>{
     console.log("Login failed");
     res.redirect("/");
@@ -92,6 +96,7 @@ router.get("/patient/failure", (req, res)=>{
 
 
 // ---------------------Middleware------------
+// checks if current user is logged in and usertype
 function isPatientLoggedIn(req, res, next){
     // console.log(req.user);
     if(req.isAuthenticated() && req.user.userType === 'patient'){

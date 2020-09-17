@@ -6,20 +6,26 @@ const express       = require("express"),
       upload        = require("../handlers/multer"),
       moment        = require('moment');
 
-      
+
+// displays doctors landing page with login and signup option ( discontinued - currently login page opens directly)
 router.get("/doctor", (req, res) => {
     res.render("doctor/doctor_landing_page");
 });
 
+// displays signup form for doctor
 router.get("/doctor/signup", (req, res) => {
     res.render("doctor/doctor_signup");
 });
 
+// displays login form for doctor
 router.get("/doctor/login", (req, res) =>{
     res.render("doctor/doctor_login");
 });
 
+// displays profile page for doctor after login
 router.get("/doctor/profile", isDoctorLoggedIn, (req,res)=>{
+    
+    // finding the doctor form database, populating meetings and payments
     User.findById(req.user._id).populate("meetings").populate("payments").exec((err, foundUser) => {
         if(err){
             console.log(err);
@@ -30,11 +36,10 @@ router.get("/doctor/profile", isDoctorLoggedIn, (req,res)=>{
 });
 
 
-// Display all Doctors
+// Display all Doctors before the login ( includes before login navbar and redirects to login when clicked on get appointment)
 router.get("/doctor/viewall",(req,res)=>{
 
     User.find({userType:'doctor'},(err,doctors)=>{
-
         if(err){
             console.log(err)
         }else{
@@ -48,6 +53,7 @@ router.get("/doctor/viewall",(req,res)=>{
 
 // -----------Auth Routes for doctor-------------------------------------
 
+// Signup Route for doctor
 router.post("/doctor/signup",upload.single('profileImage'),(req, res) => {
 
 
@@ -90,6 +96,7 @@ router.post("/doctor/signup",upload.single('profileImage'),(req, res) => {
     });
 });
 
+// login route 
 router.post("/doctor/login",passport.authenticate("local",
     {
         successRedirect: "/doctor/profile",
@@ -98,11 +105,13 @@ router.post("/doctor/login",passport.authenticate("local",
 
 });
 
+// logout route
 router.get("/doctor/logout", (req, res)=>{
     req.logout();
     res.redirect("/");
 });
 
+// login failure route
 router.get("/doctor/failure", (req, res)=>{
     console.log("doctor login failed");
     res.redirect("/");
@@ -112,6 +121,7 @@ router.get("/doctor/failure", (req, res)=>{
 
 
 // ---------------------Middleware------------
+// checks if current user is logged in and usertype
 function isDoctorLoggedIn(req, res, next){
     
     if(req.isAuthenticated() && req.user.userType === 'doctor'){
@@ -120,10 +130,10 @@ function isDoctorLoggedIn(req, res, next){
     req.logout();
     res.redirect("/doctor/login");
 }
-
 // --------------------------------------------
 
-// divide time in intervals
+
+// divides the start time and end time of doctor into equal slots of duration( provided by doctor )
 function intervals(startString, endString, duration) {
     var start = moment(startString, 'hh:mm a');
     var end = moment(endString, 'hh:mm a');
@@ -140,7 +150,6 @@ function intervals(startString, endString, duration) {
         result.push(current.format('HH:mm'));
         current.add(duration, 'minutes');
     }
-
     return result;
 }
 

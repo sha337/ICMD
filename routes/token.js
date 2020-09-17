@@ -11,6 +11,7 @@ let clientID='F_D07LjfTkSnldN9VZd6TA';
 let clientSecret='EBnErrJ9JNXWRNdFzcWpotI2mzTHc1ya';
 let redirectURL='http://iconsultmydoctor.herokuapp.com/gettoken';
 
+// this route generates the access token and refresh token ( used only if server goes to sleep )
 router.get('/gettoken', (req, res) => {
     // Step 1: 
     // Check if the code parameter is in the url 
@@ -27,12 +28,11 @@ router.get('/gettoken', (req, res) => {
             // Parse response to JSON
             body = JSON.parse(body);
 
-            // Logs your access and refresh tokens in the browser
+            // Logs your access and refresh tokens
             console.log(`access_token: ${body.access_token}`);
             console.log(`refresh_token: ${body.refresh_token}`);
             
             // save the token in database
-
             Token.findOne({id: "1"}, (err, token)=>{
                 if(err){
                     console.log(err);
@@ -55,11 +55,15 @@ router.get('/gettoken', (req, res) => {
     res.redirect('https://zoom.us/oauth/authorize?response_type=code&client_id=' + clientID + '&redirect_uri=' + redirectURL)
 });
 
-// this route genrates zoom meeting link
-router.get('/newmeeting/:meet_id', (req, res) => {
 
+// this route genrates zoom meeting link
+router.get('/newmeeting/:meet_id', async (req, res) => {
+// finding the access token from database
+    let meeting = await Meeting.findById(req.params.meet_id);
+    let meeting_date_time = meeting.date + "T" + meeting.time;
+    console.log(meeting_date_time);
     Token.findOne({id:'1'}, (err, token)=>{
-        
+        // object containing the API url, headers and details of meeting(body) 
         let options = {
             method: 'POST',
             url: 'https://api.zoom.us/v2/users/shabbaralee@gmail.com/meetings',
@@ -70,8 +74,8 @@ router.get('/newmeeting/:meet_id', (req, res) => {
             body: {
                 topic: "Doctor Consultation",
                 type: 2,                              
-                start_time: "2020-09-11T22:32:00",    // meeting start time
-                duration: 30,                       // 30 minutes
+                start_time: meeting_date_time,    // meeting start time
+                duration: 60,                       // 30 minutes
                 password: "123456",
                 setting: {
                     waiting_room: false,
@@ -86,6 +90,7 @@ router.get('/newmeeting/:meet_id', (req, res) => {
             json: true
         };
 
+        // sending post request to zoom API to generate meeting link
         request(options, function(error, response, body) {
             // Parse response to JSON
             // body = JSON.parse(body);
@@ -96,15 +101,10 @@ router.get('/newmeeting/:meet_id', (req, res) => {
                 throw new Error(error);
             }  
             else{
-                Meeting.findById(req.params.meet_id, (err, meeting)=>{
-                    console.log("before:");
-                    console.log(meeting);
-                    meeting.link = body.join_url;
-                    meeting.save();
-                    console.log("after:");
-                    console.log(meeting);
-                });
-                // console.log(body);
+                meeting.link = body.join_url;
+                meeting.payment = true;
+                meeting.save();
+                console.log(body);
                 res.redirect("/patient/profile");
             }
             
@@ -113,6 +113,7 @@ router.get('/newmeeting/:meet_id', (req, res) => {
 });
 
 
+//function to refresh the access_token after every 20minutes ( access token expires after 60mins )
 function refreshToken(){
     console.log("Refresh token function called");
     Token.findOne({id:'1'}, (err, token)=>{
@@ -137,6 +138,7 @@ function refreshToken(){
     });
 }
 
+// calling refresh token after every 20mins
 setInterval(refreshToken, 20*60*1000);
 
 

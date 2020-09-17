@@ -12,63 +12,49 @@ const express       = require('express'),
 
 
 
+// this route redirects to payumoney payment gateway when patient clicked on get appointment 
 router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, async (req, res) => {
     // save doctors id and patient id to pass it to success url
     let doc_id = req.params.id;
     let pat_id = req.user._id;
+    let meet_id;
+
+    // Finding the doctor & patient from database
+    let doctor = await User.findById(doc_id);
+    let patient = await User.findById(pat_id);
 
     let meetingdetails = {
         time: req.body.time,
-        date: req.body.dateofapp
+        date: req.body.dateofapp,
+        payment: false
     };
 
     // creating a meeting in my database
-    // Finding the doctor from database
-    User.findById(doc_id, (err, doctor)=>{
-        if(err){
-            console.log(err);
-            res.redirect("/");
-        }else{
-            
-            // Create a meeting in DB
-            Meeting.create(meetingdetails, (err, meeting)=>{
-                if(err){
-                    counsole.log(err);
-                    res.redirect("/");
-                }else{
-                    console.log(meeting);
-                    meet_id = meeting._id;
-                    
-                    // adding patient details
-                    meeting.patient.id        = req.user._id;
-                    meeting.patient.firstName = req.user.firstName;
-                    meeting.patient.lastName  = req.user.lastName;
+    let meeting = await new Meeting(meetingdetails);
+    meet_id = meeting._id;
 
-                    // adding doctor details
-                    meeting.doctor.id = doctor._id;
-                    meeting.doctor.firstName = doctor.firstName;
-                    meeting.doctor.lastName = doctor.lastName;
+    // adding patient details
+    meeting.patient.id        = patient._id;
+    meeting.patient.firstName = patient.firstName;
+    meeting.patient.lastName  = patient.lastName;
 
-                    // update meeting
-                    meeting.save();
-
-                    // push meeting in doctors database
-                    doctor.meetings.push(meeting);
-                    doctor.save();
-
-                    // Finding the patient
-                    User.findById(req.user._id, (err, patient)=>{
-                        // push the meeting in patient DB
-                        patient.meetings.push(meeting);
-                        patient.save();
-                        console.log("Meeting Created");
-                    });
-                }
-            });
-        }
-    })
+    // adding doctor details
+    meeting.doctor.id        = doctor._id;
+    meeting.doctor.firstName = doctor.firstName;
+    meeting.doctor.lastName  = doctor.lastName;
     
+    // update meeting
+    await meeting.save();
 
+    // push meeting in doctors database
+    doctor.meetings.push(meeting);
+    await doctor.save();
+    
+    patient.meetings.push(meeting);
+    await patient.save();
+    
+    console.log(meet_id);
+    console.log(meeting);
     // ***************Payment Logic Below*******************
 
     //Here save all the details in pay object
@@ -98,9 +84,10 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, async (req, res
     const hash = sha.getHash("HEX");
         
     //We have to additionally pass merchant key to API
-    //  so remember to include it.
+    // so remember to include it.
     pay.key  = "xQRSB1rh" //store in in different file;
-    pay.surl = 'http://iconsultmydoctor.herokuapp.com/payment/success/'+doc_id+"/"+pat_id;
+    console.log("before url: "+meet_id);
+    pay.surl = 'http://iconsultmydoctor.herokuapp.com/payment/success/'+doc_id+"/"+pat_id+"/"+meet_id;
     pay.furl = 'http://iconsultmydoctor.herokuapp.com/payment/fail';
     pay.hash = hash;
     //Making an HTTP/HTTPS call with request
@@ -129,7 +116,7 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, async (req, res
 
 
 // if payment successful, this route is called
-router.post('/payment/success/:doc_id/:pat_id',  (req, res) => {
+router.post('/payment/success/:doc_id/:pat_id/:meet_id',  (req, res) => {
     //Payumoney will send Success Transaction data to req body. 
     //  Based on the response Implement UI as per you want
     
@@ -189,15 +176,13 @@ router.post('/payment/success/:doc_id/:pat_id',  (req, res) => {
                 }
             });  
             
-            let meetings = doctor.meetings;
-            let meet_id = meetings[meetings.length - 1]._id;
             res.redirect('/newmeeting/'+meet_id);   
         }
     });
 });
 
 
-
+// failure route in case of payment failure
 router.post('/payment/fail', (req, res) => {
     console.log(req.body);
     res.send("payment Failed");

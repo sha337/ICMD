@@ -36,9 +36,9 @@ router.put("/forgotpassword", async(req, res)=>{
     // compile the mail
     const msg = {
       to: email,
-      from: 'iconsultmydoctor@gmail.com', // Use the email address or domain you verified above
+      from: 'iconsultmydoctor@gmail.com', 
       subject: 'Reset password',
-      text: `You are receiving this because you (or someone else) have requested the reset of the password for your account. Please click on the following link, or paste this into your browser to complete the process: 
+      text: `You are receiving this because you (or someone else) have requested the reset of the password for your account. Please click on the following link, or paste this into your browser to complete the process:
       http://${req.headers.host}/reset/${token}  
       If you did not request this, please ignore this email and 
       your password will remain unchanged.`.replace(/    /g, ''),
@@ -51,7 +51,7 @@ router.put("/forgotpassword", async(req, res)=>{
 });
 
 
-// coming back from email reset password
+//displays reset password page 
 router.get('/reset/:token', async(req, res) => {
     // find the user based on token and expiration time of token
     const token = req.params.token;
@@ -59,17 +59,19 @@ router.get('/reset/:token', async(req, res) => {
       resetPasswordToken: token,
       resetPasswordExpires: { $gt: Date.now() }
     });
+
     // if not exist or token expires
     if(!user){
       console.log("Password reser token has expired");
       return res.redirect('/forgotpassword');
     }
+
     // if token is valid show the reset password page
     res.render("reset", {token});
 });
 
 
-// route to reset the password
+// route to reset the password 
 router.put('/reset/:token', async(req, res)=>{
     // collect the token and find the user
     const token = req.params.token;
