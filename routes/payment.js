@@ -7,8 +7,8 @@ const express       = require('express'),
       Meeting       = require("../models/meeting"),
       Payment       = require("../models/payment"),
       Token         = require("../models/token"),
-      async = require('async'),
-      await = require('await');
+      async         = require('async'),
+      await         = require('await');
 
 
 
