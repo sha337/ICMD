@@ -175,6 +175,12 @@ body, html {
 	border-radius: 5px;
 }
 
+.form-button{
+	background: linear-gradient(to bottom, #71df54 0%, #30a039 100%);
+	border-radius: 3px;
+
+}
+
 .home-page-landing-text a:hover{
 	color: white;
 }
@@ -183,7 +189,7 @@ body, html {
 .home-registration-text h1{
 	text-align: center;
 	margin-top: 5%;
-	color: #004A7D;
+	color: #008dc9;
 	font-family: Montserrat;
 	font-size: 2.5vw;
 	font-weight: 500;
