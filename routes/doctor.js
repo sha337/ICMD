@@ -66,7 +66,7 @@ router.post("/doctor/signup",upload.single('profileImage'),(req, res) => {
         // gender: req.body.gender, 
         // age: req.body.age,
         userType: req.body.userType,
-        // profileImage:req.file.filename
+        profileImage:req.file.filename,
         // mciLicense: req.body.mciLicense,
         // specialization: req.body.specialization,
         // referenceFirstName1: req.body.referenceFirstName1,
