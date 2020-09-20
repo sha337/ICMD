@@ -42,7 +42,94 @@
             </div>
             
         </div>
-        <div class=" price-plans">
+
+        <!-- Top doctors card -->
+        <div class="container doctor-cards">
+            <div class="tag-line"><h1>Meet Some Of Our Top Providers</h1></div>
+            <div class="row">
+              <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="our-team">
+                  <div class="picture">
+                    <img class="img-fluid" src="https://cdn.amwell.com/static/amwell/images/consumer/homepage/ipad_DocProfile_AntallPeter@2x.933b4de795c2.jpg">
+                  </div>
+                  <div class="team-content">
+                    <h3 class="name">PETER ANTALL, MD</h3>
+                    <h4 class="title">Pediatrician</h4>
+                    <p class="title">"I am a board-certified pediatrician with 20 years experience. I am happy to see you, or your child."</p>
+                  </div>
+                  <ul class="social">
+                    <% if(currentUser){ %>
+                        <li><a href="/<%= currentUser.userType %>/profile">Get Appointment</a></li>
+                    <% }else{%>
+                        <li><a href="/patient/login">Get Appointment</a></li>
+                    <% } %>
+                  </ul>
+                </div>
+              </div>
+                  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="our-team">
+                  <div class="picture">
+                    <img class="img-fluid" src="https://cdn.amwell.com/static/amwell/images/consumer/homepage/DocProfile_MiaFinkelston@2x.db290e6fb33f.jpg">
+                  </div>
+                  <div class="team-content">
+                    <h3 class="name">MIA FINKELSTON, MD</h3>
+                    <h4 class="title">Family Physician</h4>
+                    <p class="title">"I go by Dr. Mia and have 20 years of family medicine experience. I look forward to being your physician."</p>
+                  </div>
+                  <ul class="social">
+                    <% if(currentUser){ %>
+                        <li><a href="/<%= currentUser.userType %>/profile">Get Appointment</a></li>
+                    <% }else{%>
+                        <li><a href="/patient/login">Get Appointment</a></li>
+                    <% } %>
+                  </ul>
+                </div>
+              </div>
+                  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="our-team">
+                  <div class="picture">
+                    <img class="img-fluid" src="https://cdn.amwell.com/static/amwell/images/consumer/homepage/ipad_DocProfile_HendersonLindsay@2x.42dbf866a7f8.jpg">
+                  </div>
+                  <div class="team-content">
+                    <h3 class="name">LINDSAY HENDERSON, PSYD</h3>
+                    <h4 class="title">Psychologist</h4>
+                    <p class="title">"I’ve been in practice for over a decade. With my adolescent and adult clinical expertise, I can help you get more out of life."</p>
+                  </div>
+                  <ul class="social">
+                    <% if(currentUser){ %>
+                        <li><a href="/<%= currentUser.userType %>/profile">Get Appointment</a></li>
+                    <% }else{%>
+                        <li><a href="/patient/login">Get Appointment</a></li>
+                    <% } %>
+                  </ul>
+                </div>
+              </div>
+                  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="our-team">
+                  <div class="picture">
+                    <img class="img-fluid" src="https://cdn.amwell.com/static/amwell/images/consumer/homepage/DocProfile_MargaretApura@2x.e9a11a352652.jpg">
+                  </div>
+                  <div class="team-content">
+                    <h3 class="name">MARGARET APURA, RD</h3>
+                    <h4 class="title">Dietitian</h4>
+                    <p class="title">"I have over 15 years of experience as a Registered Dietitian working with people like you to reach your health goals."</p>
+                  </div>
+                  <ul class="social">
+                    <% if(currentUser){ %>
+                        <li><a href="/<%= currentUser.userType %>/profile">Get Appointment</a></li>
+                    <% }else{%>
+                        <li><a href="/patient/login">Get Appointment</a></li>
+                    <% } %>  
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- Price plans -->
+        <div class=" price-plans" style="margin-top: 10%; margin-bottom: 10%;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 ">
