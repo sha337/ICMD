@@ -5,7 +5,8 @@ const express       = require('express'),
       router        = express.Router(),
       request       = require('request'),
       Meeting       = require("../models/meeting"),
-      Token         = require("../models/token");
+      Token         = require("../models/token"),
+      tokenRefresh  = require('../utils/tokenRefresh');
 
 let clientID='F_D07LjfTkSnldN9VZd6TA';
 let clientSecret='EBnErrJ9JNXWRNdFzcWpotI2mzTHc1ya';
@@ -113,33 +114,9 @@ router.get('/newmeeting/:meet_id', async (req, res) => {
 });
 
 
-//function to refresh the access_token after every 20minutes ( access token expires after 60mins )
-function refreshToken(){
-    console.log("Refresh token function called");
-    Token.findOne({id:'1'}, (err, token)=>{
-        var options = {
-            method: 'POST',
-            url: 'https://zoom.us/oauth/token?grant_type=refresh_token&refresh_token='+token.refresh_token,
-            headers: {
-                authorization: 'Basic ' + Buffer.from(clientID + ':' + clientSecret).toString('base64')
-            }
-        };
-        request(options, function (error, response, body) {
-            body = JSON.parse(body);
-            if(error)   throw new Error(error);
-            else{
-                token.access_token = body.access_token;
-                token.refresh_token = body.refresh_token;
-                token.save();
-                console.log("**token refreshed**");
-            }
-            
-        });
-    });
-}
 
 // calling refresh token after every 20mins
-setInterval(refreshToken, 20*60*1000);
+setInterval(tokenRefresh, 20*60*1000);
 
 
 

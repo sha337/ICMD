@@ -1,14 +1,14 @@
-const   express = require("express"),
-        app     = express(),
-        bodyparser = require("body-parser"),
-        mongoose = require("mongoose"),
-        passport   = require("passport"),
-        LocalStrategy = require("passport-local"),
+const   express               = require("express"),
+        app                   = express(),
+        bodyparser            =  require("body-parser"),
+        mongoose              = require("mongoose"),
+        passport              = require("passport"),
+        LocalStrategy         = require("passport-local"),
         passportLocalMongoose = require('passport-local-mongoose'),
-        User         = require("./models/user"),
-        request = require('request'),
-        methodOverride = require("method-override");
-
+        User                  = require("./models/user"),
+        request               = require('request'),
+        methodOverride        = require("method-override"),
+        tokenRefresh          = require('./utils/tokenRefresh');
 
 // Basic setup
 app.set("view engine", "ejs");
@@ -39,12 +39,6 @@ app.use(function(req, res, next){
 });
 
 
-// Home page route
-app.get('/', (req, res) =>{
-    res.render("home");
-});
-
-
 // Requiring routes
 const doctorRoutes        = require("./routes/doctor");
 const patientRoutes       = require("./routes/patient");
@@ -62,6 +56,15 @@ app.use(paymentRoutes);
 app.use(forgotPasswordRotes);
 
 
+// Home page route
+app.get('/', (req, res) =>{
+    tokenRefresh();
+    res.render("home");
+});
+
+
 app.listen(process.env.PORT || 3000, process.env.IP, () => {
     console.log("server started on port 3000 ....");
 });
+
+

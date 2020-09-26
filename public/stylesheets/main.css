@@ -139,6 +139,13 @@ body, html {
 
 
 /* tagline on home page css start*/
+@media (max-width: 576px){
+	.home-page-tagline{
+		padding-left: 4%;
+		padding-top: 1%;
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+}
 .home-page-tagline{
 	padding-left: 4%;
 	padding-top: 1%;
@@ -175,10 +182,10 @@ body, html {
 	border-radius: 5px;
 }
 
+
 .form-button{
 	background: linear-gradient(to bottom, #71df54 0%, #30a039 100%);
 	border-radius: 3px;
-
 }
 
 .home-page-landing-text a:hover{
