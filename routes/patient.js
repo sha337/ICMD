@@ -22,7 +22,7 @@ router.get("/patient/login", (req, res) =>{
 
 // displays profile page for patient after login
 router.get("/patient/profile", isPatientLoggedIn, (req,res)=>{
-    User.findById(req.user._id).populate("meetings").populate("payments").exec((err, foundUser) => {
+    User.findById(req.user._id).populate("meetings").populate("payments").populate("prescriptions").exec((err, foundUser) => {
         if(err){
             console.log(err);
         }else{

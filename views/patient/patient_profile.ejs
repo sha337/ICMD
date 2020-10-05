@@ -127,11 +127,27 @@
 
 <!-- Prescription Content Below -->
 <section class="prescription-content content">
+      <h5 style="margin-bottom: 2rem;font-weight: 700;letter-spacing: 1px;color: #004A7D;">ALL PAYMENTS</h5>
+
   <div>
-    <h5 style="margin-bottom: 2rem;font-weight: 700;letter-spacing: 1px;color: #004A7D;">ALL PRESCRIPTIONS</h5>
-    <div class="card mb-5">
-      <p>Prescription content is here</p>
+    
+    <% User.prescriptions.reverse().forEach(function(prescription){ %>
+    
+    <div class="table-responsive">
+        <div>
+
+          <p>Doctor Name: <%= prescription.doctor.firstName %> <%= prescription.doctor.lastName %></p>
+          <% let l = prescription.medicines.length %>
+          
+          <ul>
+
+            <%for( let i=0; i < l ; i++){%>
+                <li><%= prescription.medicines[i] %></li>
+            <%}%>
+          </ul>
+        </div>
     </div>
+    <% }) %>
   </div>
 </section>
 
