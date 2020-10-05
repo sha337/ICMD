@@ -42,6 +42,14 @@ let userSchema = new mongoose.Schema({
         }
     ],
 
+    // prescriptions given by doctor or received by patient
+    prescriptions : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Prescription"
+        }
+    ],
+
     // payments done by patient/ ( or for which doctor )
     payments : [
         {

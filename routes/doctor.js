@@ -3,6 +3,7 @@ const express       = require("express"),
       passport      = require("passport"),
       LocalStrategy = require("passport-local"),
       User          = require("../models/user"),
+      Prescription  = require("../models/prescription"),
       upload        = require("../handlers/multer"),
       moment        = require('moment');
 
@@ -46,6 +47,51 @@ router.get("/doctor/viewall",(req,res)=>{
             res.render("doctor/doctor_view_all",{doctors:doctors});
         }
     });
+});
+
+
+
+// Prescribe medicine 
+router.post("/doctor/prescribe_medicine/:id", isDoctorLoggedIn, async(req, res)=>{
+    // converting req.body object containing medicines names to an array of medicines
+    let medicinesArray = Object.values(req.body);
+    
+    let pat_id = req.params.id;
+    let doc_id = req.user._id;
+
+    // Finding the doctor & patient from database
+    let doctor = await User.findById(doc_id);
+    let patient = await User.findById(pat_id);
+
+    let prescriptiondetails = {
+        medicines: medicinesArray
+    };
+
+    // creating a prescription in my database
+    let prescription = await new Prescription(prescriptiondetails);
+
+    // adding patient details
+    prescription.patient.id        = patient._id;
+    prescription.patient.firstName = patient.firstName;
+    prescription.patient.lastName  = patient.lastName;
+
+    // adding doctor details
+    prescription.doctor.id        = doctor._id;
+    prescription.doctor.firstName = doctor.firstName;
+    prescription.doctor.lastName  = doctor.lastName;
+
+    // update prescription
+    await prescription.save();
+
+    // push prescription in doctors database
+    doctor.prescriptions.push(prescription);
+    await doctor.save();
+    
+    // push prescription in patient database
+    patient.prescriptions.push(prescription);
+    await patient.save();
+
+    res.redirect("/doctor/profile");
 });
 
 

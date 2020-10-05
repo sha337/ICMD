@@ -69,8 +69,9 @@
   <!-- **************************Dashboard toggle ends***************************** -->
 
   
-  <!-- Script to add input fields while prescribing medicine -->
+  <!-- Script for medicine pop up -->
   <script type="text/JavaScript">
+  // to add input fields while prescribing medicine
     $(document).ready(function() {
       var max_fields      = 10; //maximum input boxes allowed
       var wrapper   		  = $("#medicine-list"); //Fields wrapper
@@ -81,7 +82,7 @@
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
           x++; //text box increment
-          $(wrapper).append(`<div style="margin-top: 2%"><input style="width: 95%; height: 100%; float: left;" type="text" class="form-control" name="medicine`+x+`" placeholder="Medicine Name"/><a href="#" class="remove_field"><i style="margin-left: 2%; margin-top: 2%; color: red;" class="fas fa-times"></i></a></div>`); //add input box
+          $(wrapper).append(`<div style="margin-top: 2%"><input style="width: 95%; height: 100%; float: left;" type="text" class="form-control" name="medicine`+x+`" placeholder="Medicine Name" autocomplete="off"/><a href="#" class="remove_field"><i style="margin-left: 2%; margin-top: 2%; color: red;" class="fas fa-times"></i></a></div>`); //add input box
         }
       });
       
@@ -89,6 +90,19 @@
         e.preventDefault(); $(this).parent('div').remove(); x--;
       })
     });
+
+
+    // Pass patient id to popup
+    $('#prescription').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var recipient = button.data('patientid') // Extract info from data-* attributes
+      
+      var modal = $(this)
+      modal.find('.prescription-form').attr('action', '/doctor/prescribe_medicine/'+recipient);
+      // modal.find('.modal-body input').val(recipient)
+    });
+
+
     </script>
  
 

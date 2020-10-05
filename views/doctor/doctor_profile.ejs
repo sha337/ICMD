@@ -76,7 +76,7 @@
               <td><%= meeting.time %></td>
               <td><a target="_blank" href="<%= meeting.link %>" class="btn btn-primary">Join call</a></td>
               <td>
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#prescription">Rx</button>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#prescription" data-patientid="<%=meeting.patient.id%>">Rx</button>
               </td>
             </tr>
           </tbody>
@@ -96,17 +96,17 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="">
+      <form class="prescription-form" action="/doctor/prescribe_medicine" method="POST">
         <div class="modal-body" id="prescription-wrapper">
             <div class="md-form" id="medicine-list">
-              <div><input style="width: 95%; height: 100%;" type="text" class="form-control" name="medicine1" placeholder="Medicine Name"></div>
+              <div><input style="width: 95%; height: 100%;" type="text" class="form-control" name="medicine1" placeholder="Medicine Name" autocomplete="off"></div>
             </div>
             <div>
               <a href="#" style="margin-left: 94%;"><i style="padding-top: 5%;" class="fas fa-plus-circle add-medicine fa-2x" onclick=addfield()></i></a>
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Prescribe</button>
+          <button type="submit" class="btn btn-primary">Prescribe</button>
         </div>
       </form>
     </div>
