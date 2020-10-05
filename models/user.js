@@ -43,7 +43,7 @@ let userSchema = new mongoose.Schema({
     ],
 
     // prescriptions given by doctor or received by patient
-    prescriptions : [
+    prescriptions: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Prescription"

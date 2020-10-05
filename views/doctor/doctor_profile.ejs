@@ -118,12 +118,24 @@
 <!-- Prescription Content Below -->
 <section class="prescription-content content">
   <div>
-    <div class="card mb-5">
-      <a class="btn btn-lg btn-primary" href="#">Prescriptions Given by Doctor</a>
+    
+    <% User.prescriptions.reverse().forEach(function(prescription){ %>
+    
+    <div class="table-responsive">
+        <div>
+
+          <p>Patient Name: <%= prescription.patient.firstName %> <%= prescription.patient.lastName %></p>
+          <% let l = prescription.medicines.length %>
+          
+          <ul>
+
+            <%for( let i=0; i < l ; i++){%>
+                <li><%= prescription.medicines[i] %></li>
+            <%}%>
+          </ul>
+        </div>
     </div>
-    <div class="card mb-5">
-      <p>Prescription content is here</p>
-    </div>
+    <% }) %>
   </div>
 </section>
 
