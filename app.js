@@ -58,6 +58,7 @@ app.use(forgotPasswordRotes);
 
 // Home page route
 app.get('/', (req, res) =>{
+    tokenRefresh();
     res.render("home");
 });
 
