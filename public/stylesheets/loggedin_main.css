@@ -301,7 +301,6 @@ label #sidebar_btn:hover{
 	padding: 10px 30px;
 	border-radius: 5px;
 	box-shadow: 2px 2px 14px rgba(0,0,0,0.15);
-	width: 350px;
-  margin: 0px 0px;
+	width: 100%;
 	margin-bottom: 3%;
 }
