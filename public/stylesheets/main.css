@@ -118,6 +118,20 @@ body, html {
 	margin-top: 75px;
 }
 
+@media (min-width: 768px){
+	.home-page-landing-text p{
+		width: 45%;
+	}
+}
+
+@media (max-width: 768px){
+	.home-page-landing-text p{
+		width: 70%;
+	}
+}
+
+
+
 .home-page-landing-text{
 	padding-top: 8%;
 	padding-left: 4%;
@@ -139,7 +153,7 @@ body, html {
 
 
 /* tagline on home page css start*/
-@media (max-width: 576px){
+@media (max-width: 768px){
 	.home-page-tagline{
 		padding-left: 4%;
 		padding-top: 1%;

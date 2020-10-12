@@ -1,19 +1,15 @@
 .site-footer
 {
    /* background-color: rgba(51, 161, 159,0.9); */
-  background-color:#EAF0F1;
+  background-color: #008dc9;
   padding:45px 0 20px;
   font-size:15px;
   line-height:24px;
 
   /* color:rgba(167, 214, 213,0.9); */
-  color:#2C3335;
+  color:white;
 }
-.site-footer .navbar-brand{
-  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
-				 0px 8px 13px rgba(0, 0, 0, 0.1),
-				 0px 18px 23px rgba(0, 0, 0, 0.1);
-}
+
 
 .site-footer hr
 {
@@ -26,7 +22,7 @@
 }
 .site-footer h6
 {
-  color:#2C3335;
+  color:white;
   font-size:16px;
   text-transform:uppercase;
   margin-top:5px;
@@ -34,11 +30,11 @@
 }
 .site-footer a
 {
-  color:#2C3335;
+  color:white;
 }
 .site-footer a:hover
 {
-  color:#3366cc;
+  color:white;
   text-decoration:none;
 }
 .footer-links
@@ -52,12 +48,12 @@
 }
 .footer-links a
 {
-  color:#2C3335
+  color:white
 }
 .footer-links a:active,.footer-links a:focus,.footer-links a:hover
 {
-  color:#3366cc;
-  text-decoration:none;
+  color: white;
+  text-decoration: underline;
 }
 .footer-links.inline li
 {
@@ -114,7 +110,7 @@
 {
   margin-right:15px;
   text-transform:uppercase;
-  color:#2C3335;
+  color:white;
   font-weight:700;
   font-size:13px
 }
@@ -174,6 +170,17 @@
     margin-right:0;
     font-weight:600
   }
+}
+
+
+
+.site-footer .footer-brand-name{
+  font-size: 2rem;
+  /* letter-spacing: 0.16rem; */
+  color:white;
+  font-family: 'Open Sans';
+	font-weight: 400;
+	line-height: 26px;
 }
 
 /* .card{
