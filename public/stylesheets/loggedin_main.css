@@ -14,16 +14,6 @@ body{
     top: 0%;
 }
 
-.brand-name{
-
-    font-family: Simonetta;
-    font-weight: 900;
-	  font-size: large;
-	  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
-				 0px 8px 13px rgba(0, 0, 0, 0.1),
-				 0px 18px 23px rgba(0, 0, 0, 0.1);
-}
-  
 header{
     z-index: 1;
     position: fixed;
@@ -116,7 +106,7 @@ label #sidebar_btn{
     color: #004A7D;
     position: fixed;
     cursor: pointer;
-    left: 350px;
+    left: 310px;
     font-size: 20px;
     margin: 5px 0;
     transition: 0.5s;
