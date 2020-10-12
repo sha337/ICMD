@@ -122,20 +122,23 @@
     
     <% User.prescriptions.reverse().forEach(function(prescription){ %>
     
-    <div class="table-responsive">
-        <div>
-
-          <p>Patient Name: <%= prescription.patient.firstName %> <%= prescription.patient.lastName %></p>
-          <% let l = prescription.medicines.length %>
-          
-          <ul>
-
-            <%for( let i=0; i < l ; i++){%>
-                <li><%= prescription.medicines[i] %></li>
-            <%}%>
-          </ul>
+    <div class="todo-cmp">
+        <div class="todo-cmp__header">
+          <h2>Patient: <%= prescription.patient.firstName %> <%= prescription.patient.lastName %></h2>
+          <p> <%=prescription.date%></p>
         </div>
-    </div>
+
+        <ul class="todo-cmp__list">
+          <% let l = prescription.medicines.length %>
+          <%for( let i=0; i < l ; i++){%>
+          <li>
+            <label for="todo-01">
+              <span><%= prescription.medicines[i] %></span>
+            </label>
+          </li>	
+          <%}%>
+        </ul>
+      </div>
     <% }) %>
   </div>
 </section>

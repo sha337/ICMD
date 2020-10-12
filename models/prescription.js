@@ -18,7 +18,8 @@ let prescriptionSchema = new mongoose.Schema({
         firstName: String,
         lastName: String
     },
-    medicines: [] 
+    medicines: [], 
+    date: String
 });
 
 module.exports = mongoose.model("Prescription", prescriptionSchema);

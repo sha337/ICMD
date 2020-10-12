@@ -58,13 +58,14 @@ router.post("/doctor/prescribe_medicine/:id", isDoctorLoggedIn, async(req, res)=
     
     let pat_id = req.params.id;
     let doc_id = req.user._id;
-
+    let date = getDate();
     // Finding the doctor & patient from database
     let doctor = await User.findById(doc_id);
     let patient = await User.findById(pat_id);
 
     let prescriptiondetails = {
-        medicines: medicinesArray
+        medicines: medicinesArray,
+        date: date
     };
 
     // creating a prescription in my database
@@ -199,4 +200,14 @@ function intervals(startString, endString, duration) {
     return result;
 }
 
+
 module.exports = router;
+
+
+// returns the date
+function getDate(){
+    let d = Date().toString().substr(4, 11);
+    let month = new Date().toLocaleString('default', { month: 'long' });
+    let date = month + '' + d.slice(3, 6) + ',' + d.slice(6);
+    return date;
+}

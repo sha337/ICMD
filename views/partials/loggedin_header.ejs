@@ -43,8 +43,12 @@
     <label for="check">
       <i class="fas fa-bars" id="sidebar_btn"></i>
     </label>
-    
-      <a class="brand-name" href="/<%=currentUser.userType%>/profile" style="text-decoration: none; font-size: 1.6rem;letter-spacing: 0.1rem;color:#004A7D"><i class="fa fa-heartbeat" style="font-size:2.0rem;color:#AE1438"></i> <span style="color:#AE1438">i</span>consultmydoctor</a>
+
+      <!-- for desktop -->
+      <a class="brand-name d-none d-sm-block " href="/<%=currentUser.userType%>/profile" style="text-decoration: none; font-size: 1.6rem;letter-spacing: 0.16rem;color:#004A7D; float: left;"><i class="fa fa-heartbeat" style="font-size:2.0rem;color:#AE1438"></i> <span style="color:#AE1438">i</span>consultmydoctor</a>
+      
+      <!-- for mobile -->
+      <a class="d-block d-sm-none brand-name " href="/<%=currentUser.userType%>/profile" style="text-decoration: none; font-size: 1.6rem;letter-spacing: 0.1rem;color:#004A7D; float: left;"><i class="fa fa-heartbeat" style="font-size:2.0rem;color:#AE1438"></i> <span style="color:#AE1438">I</span>CMD</a>
    
     
       <a href="/<%=currentUser.userType%>/logout" class="btn logout_btn pull-right" style="margin-right:-0.001rem;margin-top: 5px;">Logout</a>

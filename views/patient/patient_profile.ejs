@@ -127,26 +127,30 @@
 
 <!-- Prescription Content Below -->
 <section class="prescription-content content">
-      <h5 style="margin-bottom: 2rem;font-weight: 700;letter-spacing: 1px;color: #004A7D;">ALL PAYMENTS</h5>
+      <h5 style="margin-bottom: 2rem;font-weight: 700;letter-spacing: 1px;color: #004A7D;">ALL  PRESCRIPTIONS</h5>
 
   <div>
     
     <% User.prescriptions.reverse().forEach(function(prescription){ %>
-    
-    <div class="table-responsive">
-        <div>
 
-          <p>Doctor Name: <%= prescription.doctor.firstName %> <%= prescription.doctor.lastName %></p>
-          <% let l = prescription.medicines.length %>
-          
-          <ul>
-
-            <%for( let i=0; i < l ; i++){%>
-                <li><%= prescription.medicines[i] %></li>
-            <%}%>
-          </ul>
+      <div class="todo-cmp">
+        <div class="todo-cmp__header">
+          <h2>Doctor: <%= prescription.doctor.firstName %> <%= prescription.doctor.lastName %></h2>
+          <p> <%=prescription.date%></p>
         </div>
-    </div>
+
+        <ul class="todo-cmp__list">
+          <% let l = prescription.medicines.length %>
+          <%for( let i=0; i < l ; i++){%>
+          <li>
+            <label for="todo-01">
+              <span><%= prescription.medicines[i] %></span>
+            </label>
+          </li>	
+          <%}%>
+        </ul>
+      </div>
+
     <% }) %>
   </div>
 </section>

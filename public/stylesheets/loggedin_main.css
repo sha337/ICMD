@@ -106,12 +106,12 @@ label #sidebar_btn{
     color: #004A7D;
     position: fixed;
     cursor: pointer;
-    left: 310px;
+    left: 330px;
     font-size: 20px;
     margin: 5px 0;
     transition: 0.5s;
     transition-property: color;
-    margin-top: -8px;
+    margin-top: 0px;
 }
 
 label #sidebar_btn:hover{
@@ -284,3 +284,24 @@ label #sidebar_btn:hover{
     margin: 20px;
   }
 } 
+
+
+/* Prescription CSS */
+
+.each-prescription{
+  border: 1px solid black;
+  margin-bottom: 6px;
+  width: 30%;
+  padding-left: 2%;
+}
+
+.todo-cmp {
+	background: #ffffff;
+	color: #497081;
+	padding: 10px 30px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 14px rgba(0,0,0,0.15);
+	width: 350px;
+  margin: 0px 0px;
+	margin-bottom: 3%;
+}
