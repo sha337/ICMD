@@ -58,7 +58,7 @@ router.post("/doctor/prescribe_medicine/:id", isDoctorLoggedIn, async(req, res)=
     
     let pat_id = req.params.id;
     let doc_id = req.user._id;
-    let date = getDate();
+    let date = await getDate();
     // Finding the doctor & patient from database
     let doctor = await User.findById(doc_id);
     let patient = await User.findById(pat_id);
