@@ -47,7 +47,9 @@ body, html {
     font-weight: 600;
 }
 
-
+.navbar-nav .nav-link{
+	padding-left: 10px;
+}
 
 #content{
 	text-align: center;
