@@ -1,5 +1,4 @@
-// Bring in environment secrets through dotenv
-// require('dotenv/config')
+require('dotenv').config();
 
 const express       = require('express'),
       router        = express.Router(),
@@ -8,8 +7,9 @@ const express       = require('express'),
       Token         = require("../models/token"),
       tokenRefresh  = require('../utils/tokenRefresh');
 
-let clientID='F_D07LjfTkSnldN9VZd6TA';
-let clientSecret='EBnErrJ9JNXWRNdFzcWpotI2mzTHc1ya';
+let clientID = process.env.ZOOM_CLIENT_ID;
+let clientSecret = process.env.ZOOM_CLIENT_SECRET;
+
 let redirectURL='http://iconsultmydoctor.herokuapp.com/gettoken';
 
 // this route generates the access token and refresh token ( used only if server goes to sleep )
@@ -76,12 +76,12 @@ router.get('/newmeeting/:meet_id', async (req, res) => {
                 topic: "Doctor Consultation",
                 type: 2,                              
                 start_time: meeting_date_time,    // meeting start time
-                duration: 60,                       // 30 minutes
+                duration: 60,                     // 60 minutes
                 password: "123456",
                 setting: {
                     waiting_room: false,
                     join_before_host: true,
-                    approval_type: 0,   // 0 is for automatic approval
+                    approval_type: 0,             // 0 is for automatic approval
                     contact_name: "Shabbar Ali",
                     contact_email: "shabbaralee@gmail.com",
                     registrants_confirmation_email: true,

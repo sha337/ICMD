@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express       = require('express'),
       router        = express.Router(),
       jsSHA         = require("jssha"),
@@ -68,7 +70,7 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, async (req, res
     pay.udf2             = req.user.phoneNumber;
     pay.service_provider = "payu_paisa";
     
-    const hashString = "xQRSB1rh" //store in in different file
+    const hashString = process.env.PAYMENT_KEY 
         + '|' + pay.txnid
         + '|' + pay.amount 
         + '|' + pay.productinfo 
@@ -77,16 +79,18 @@ router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, async (req, res
         + '|' + pay.udf1   //lastname
         + '|' + pay.udf2   //phoneno.
         + '|' + '||||||||' 
-        + "ojB0LSS5kW" //store in in different file
+        + process.env.PAYMENT_SALT 
+    
     const sha = new jsSHA('SHA-512', "TEXT");
     sha.update(hashString);
+
     //Getting hashed value from sha module
     const hash = sha.getHash("HEX");
         
     //We have to additionally pass merchant key to API
     // so remember to include it.
-    pay.key  = "xQRSB1rh" //store in in different file;
-    console.log("before url: "+meet_id);
+    pay.key  = process.env.PAYMENT_KEY; 
+    
     pay.surl = 'http://iconsultmydoctor.herokuapp.com/payment/success/'+doc_id+"/"+pat_id+"/"+meet_id;
     pay.furl = 'http://iconsultmydoctor.herokuapp.com/payment/fail';
     pay.hash = hash;

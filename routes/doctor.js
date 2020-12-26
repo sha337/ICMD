@@ -165,6 +165,8 @@ router.get("/doctor/failure", (req, res)=>{
 });
 // ------------------------------Auth Routes Ends------------------------------
 
+module.exports = router;
+
 
 
 // ---------------------Middleware------------
@@ -199,9 +201,6 @@ function intervals(startString, endString, duration) {
     }
     return result;
 }
-
-
-module.exports = router;
 
 
 // returns the date

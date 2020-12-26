@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express       = require('express'),
       router        = express.Router(),
       User          = require("../models/user"),
@@ -8,7 +10,7 @@ const express       = require('express'),
       crypto        = require('crypto');
 
 // send grid api key ---- store in process.env
-sgMail.setApiKey("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");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 
 // Show forgot password page
@@ -22,17 +24,21 @@ router.put("/forgotpassword", async(req, res)=>{
     // generate a token which will be vaild for 1 hr to reset the password
     const token = await crypto.randomBytes(20).toString('hex');
     const {email} = req.body;
+
     // find the user based on email provided by user
     const user = await User.findOne({username: email});
+    
     // if that email id dosent exist
     if(!user){
       console.log("User doesnot exist");
       return res.redirect("/forgotpassword");
     }
+    
     // if exist put the token and expire time in database
     user.resetPasswordToken = token;
     user.resetPasswordExpires = Date.now() + 3600000;
     await user.save();
+    
     // compile the mail
     const msg = {
       to: email,
@@ -44,6 +50,7 @@ router.put("/forgotpassword", async(req, res)=>{
       your password will remain unchanged.`.replace(/    /g, ''),
       // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
     };
+    
     // send the mail
     await sgMail.send(msg);
     console.log("An email has been sent to " + email);
