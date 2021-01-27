@@ -6,7 +6,8 @@ const express       = require("express"),
       Prescription  = require("../models/prescription"),
       upload        = require("../handlers/multer"),
       middleware    = require("../middleware"),
-      moment        = require('moment');
+      utilfunction  = require("../utils");
+      
 
 
 // displays doctors landing page with login and signup option ( discontinued - currently login page opens directly)
@@ -59,7 +60,7 @@ router.post("/doctor/prescribe_medicine/:id", middleware.isDoctorLoggedIn, async
     
     let pat_id = req.params.id;
     let doc_id = req.user._id;
-    let date = await getDate();
+    let date = await utilfunction.getDate();
     // Finding the doctor & patient from database
     let doctor = await User.findById(doc_id);
     let patient = await User.findById(pat_id);
@@ -128,9 +129,9 @@ router.post("/doctor/signup",upload.single('profileImage'),(req, res) => {
         startTime: req.body.startTime,
         endTime: req.body.endTime,
         duration: req.body.duration,
-        availableSlots: intervals(req.body.startTime, req.body.endTime, parseInt(req.body.duration))
+        availableSlots: utilfunction.intervals(req.body.startTime, req.body.endTime, parseInt(req.body.duration))
     });
-    console.log(newDoctor);
+    
     User.register(newDoctor, req.body.password, (err, doctor) =>{
         if(err){
             console.log(err);
@@ -169,33 +170,3 @@ router.get("/doctor/failure", (req, res)=>{
 module.exports = router;
 
 
-
-
-// divides the start time and end time of doctor into equal slots of duration( provided by doctor )
-function intervals(startString, endString, duration) {
-    var start = moment(startString, 'hh:mm a');
-    var end = moment(endString, 'hh:mm a');
-
-    // round starting minutes up to nearest 15 (12 --> 15, 17 --> 30)
-    // note that 59 will round up to 60, and moment.js handles that correctly
-    start.minutes(Math.ceil(start.minutes() / 15) * 15);
-
-    var result = [];
-
-    var current = moment(start);
-
-    while (current <= end) {
-        result.push(current.format('HH:mm'));
-        current.add(duration, 'minutes');
-    }
-    return result;
-}
-
-
-// returns the date
-function getDate(){
-    let d = Date().toString().substr(4, 11);
-    let month = new Date().toLocaleString('default', { month: 'long' });
-    let date = month + '' + d.slice(3, 6) + ',' + d.slice(6);
-    return date;
-}
