@@ -5,6 +5,7 @@ const express       = require("express"),
       User          = require("../models/user"),
       Prescription  = require("../models/prescription"),
       upload        = require("../handlers/multer"),
+      middleware    = require("../middleware"),
       moment        = require('moment');
 
 
@@ -24,7 +25,7 @@ router.get("/doctor/login", (req, res) =>{
 });
 
 // displays profile page for doctor after login
-router.get("/doctor/profile", isDoctorLoggedIn, (req,res)=>{
+router.get("/doctor/profile", middleware.isDoctorLoggedIn, (req,res)=>{
     
     // finding the doctor form database, populating meetings and payments
     User.findById(req.user._id).populate("meetings").populate("payments").populate("prescriptions").exec((err, foundUser) => {
@@ -52,7 +53,7 @@ router.get("/doctor/viewall",(req,res)=>{
 
 
 // Prescribe medicine 
-router.post("/doctor/prescribe_medicine/:id", isDoctorLoggedIn, async(req, res)=>{
+router.post("/doctor/prescribe_medicine/:id", middleware.isDoctorLoggedIn, async(req, res)=>{
     // converting req.body object containing medicines names to an array of medicines
     let medicinesArray = Object.values(req.body);
     
@@ -168,18 +169,6 @@ router.get("/doctor/failure", (req, res)=>{
 module.exports = router;
 
 
-
-// ---------------------Middleware------------
-// checks if current user is logged in and usertype
-function isDoctorLoggedIn(req, res, next){
-    
-    if(req.isAuthenticated() && req.user.userType === 'doctor'){
-        return next();
-    }
-    req.logout();
-    res.redirect("/doctor/login");
-}
-// --------------------------------------------
 
 
 // divides the start time and end time of doctor into equal slots of duration( provided by doctor )

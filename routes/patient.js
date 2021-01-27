@@ -3,7 +3,8 @@ const express       = require("express"),
       passport      = require("passport"),
       LocalStrategy = require("passport-local"),
       User          = require("../models/user"),
-      upload        = require("../handlers/multer");
+      upload        = require("../handlers/multer"),
+      middleware    = require("../middleware");
     
 // displays Patients landing page with login and signup option ( discontinued - currently login page opens directly)
 router.get("/patient",(req,res)=>{
@@ -21,7 +22,7 @@ router.get("/patient/login", (req, res) =>{
 });
 
 // displays profile page for patient after login
-router.get("/patient/profile", isPatientLoggedIn, (req,res)=>{
+router.get("/patient/profile", middleware.isPatientLoggedIn, (req,res)=>{
     User.findById(req.user._id).populate("meetings").populate("payments").populate("prescriptions").exec((err, foundUser) => {
         if(err){
             console.log(err);
@@ -32,7 +33,7 @@ router.get("/patient/profile", isPatientLoggedIn, (req,res)=>{
 });
 
 // Displays all doctors if patients is logged in 
-router.get("/patient/profile/viewalldoctors", isPatientLoggedIn, (req, res) => {
+router.get("/patient/profile/viewalldoctors", middleware.isPatientLoggedIn, (req, res) => {
     User.find({userType:'doctor'},(err,doctors)=>{
 
         if(err){
@@ -92,19 +93,6 @@ router.get("/patient/failure", (req, res)=>{
 });
 
 // ------------------------------Auth Routes Ends------------------------------
-
-
-
-// ---------------------Middleware------------
-// checks if current user is logged in and usertype
-function isPatientLoggedIn(req, res, next){
-    // console.log(req.user);
-    if(req.isAuthenticated() && req.user.userType === 'patient'){
-        return next();
-    }
-    req.logout();
-    res.redirect("/patient/login");
-}
 
 
 

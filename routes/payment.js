@@ -9,13 +9,13 @@ const express       = require('express'),
       Meeting       = require("../models/meeting"),
       Payment       = require("../models/payment"),
       Token         = require("../models/token"),
-      async         = require('async'),
-      await         = require('await');
+      middleware    = require("../middleware");
+      
 
 
 
 // this route redirects to payumoney payment gateway when patient clicked on get appointment 
-router.post('/payment_gateway/:id/payumoney', isPatientLoggedIn, async (req, res) => {
+router.post('/payment_gateway/:id/payumoney', middleware.isPatientLoggedIn, async (req, res) => {
     // save doctors id and patient id to pass it to success url
     let doc_id = req.params.id;
     let pat_id = req.user._id;
@@ -191,22 +191,6 @@ router.post('/payment/fail', (req, res) => {
     console.log(req.body);
     res.send("payment Failed");
 });
-
-
-
-// Middle ware
-function isPatientLoggedIn(req, res, next){
-    // console.log(req.user);
-    if(req.isAuthenticated() && req.user.userType === 'patient'){
-        return next();
-    }
-    console.log("Patient was not logged in");
-    req.logout();
-    res.redirect("/patient/login");
-}
-
-
-
 
 
 module.exports = router;

@@ -1,5 +1,5 @@
-let clientID     ='F_D07LjfTkSnldN9VZd6TA';
-let clientSecret ='EBnErrJ9JNXWRNdFzcWpotI2mzTHc1ya';
+let clientID = process.env.ZOOM_CLIENT_ID;
+let clientSecret = process.env.ZOOM_CLIENT_SECRET;
 const Token      = require("../models/token");
 const request    = require("request");
 
